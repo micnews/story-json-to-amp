@@ -1,0 +1,8 @@
+[ignore]
+<PROJECT_ROOT>/node_modules/.*\.json
+
+[include]
+
+[libs]
+
+[options]

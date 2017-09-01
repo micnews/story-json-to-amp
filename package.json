@@ -1,0 +1,64 @@
+{
+  "name": "story-json-to-stamp",
+  "version": "0.0.0",
+  "description": "Convert story JSON to STAMP HTML.",
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && babel ./lib -d ./dist",
+    "watch": "npm run clean && babel ./lib -w -d ./dist",
+    "lint": "miclint --flow | snazzy",
+    "flow": "flow",
+    "test": "run-s lint flow test:code",
+    "test:code": "NODE_ENV=test nyc babel-tape-runner ./test.js | mic-tap-format"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micnews/story-json-to-stamp.git"
+  },
+  "keywords": [
+    "story",
+    "story json",
+    "stamp"
+  ],
+  "author": "mic.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micnews/story-json-to-stamp/issues"
+  },
+  "homepage": "https://github.com/micnews/story-json-to-stamp#readme",
+  "private": true,
+  "nyc": {
+    "extension": [
+      ".js"
+    ],
+    "exclude": [
+      "**/node_modules/**"
+    ],
+    "check-coverage": true,
+    "statements": 100,
+    "branches": 100,
+    "functions": 100,
+    "lines": 100
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-flow": "^6.23.0",
+    "babel-tape-runner": "^2.0.1",
+    "flow-bin": "^0.53.1",
+    "mic-tap-format": "^1.0.3",
+    "miclint": "^4.2.2",
+    "npm-run-all": "^4.1.1",
+    "nyc": "^11.1.0",
+    "snazzy": "^7.0.0",
+    "tape": "^4.8.0"
+  },
+  "dependencies": {
+    "dasherize": "^2.0.0",
+    "html-tag": "^1.0.0",
+    "pretty": "^2.0.0",
+    "to-css": "^1.2.1"
+  }
+}
