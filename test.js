@@ -241,8 +241,8 @@ test('parsing', (t) => {
     <amp-story>
       <amp-story-page id="page-0">
         <amp-story-grid-layer template="fill">
-          <amp-video width="900" height="1600" layout="responsive" poster="test.com/poster.jpg" loop autoplay>
-            <source src="test.com/video.mp4" type="video/mp4" />
+          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600">
+            <source type="video/mp4" src="test.com/video.mp4">
           </amp-video>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="vertical">
@@ -262,9 +262,9 @@ test('parsing', (t) => {
       </amp-story-page>
       <amp-story-page id="page-2">
         <amp-story-grid-layer template="thirds">
-          <amp-img alt="An image" src="test.com/image.jpg" width="900" height="1600" layout="responsive" style="padding-top: 500px;" grid-area="upper-third"></amp-img>
-          <amp-video width="900" height="1600" layout="responsive" poster="test.com/poster.jpg" loop autoplay style="padding-top: 500px;" grid-area="middle-third">
-            <source src="test.com/video.mp4" type="video/mp4" />
+          <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" style="padding-top: 500px;" grid-area="upper-third"></amp-img>
+          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" style="padding-top: 500px;" grid-area="middle-third">
+            <source type="video/mp4" src="test.com/video.mp4">
           </amp-video>
           <div style="padding-top: 500px;" grid-area="lower-third">
             <h1>This is a heading inside a container</h1>
