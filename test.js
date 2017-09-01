@@ -7,14 +7,14 @@ test('parsing', (t) => {
   const actual = storyJsonToStamp({
     title: 'A test story',
     defaultStyles: {
-      h1: {
+      heading: {
         color: '#fff',
         backgroundColor: 'rgba(0,0,0,0.5)',
         padding: '5px',
         fontSize: '28px',
         fontFamily: '"MicSans", arial',
       },
-      p: {
+      paragraph: {
         color: '#fff',
         backgroundColor: 'rgba(0,0,0,0.5)',
         padding: '5px',
