@@ -27,7 +27,6 @@
     "url": "https://github.com/micnews/story-json-to-stamp/issues"
   },
   "homepage": "https://github.com/micnews/story-json-to-stamp#readme",
-  "private": true,
   "nyc": {
     "extension": [
       ".js"
