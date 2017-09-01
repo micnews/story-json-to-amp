@@ -262,7 +262,7 @@ test('parsing', (t) => {
       </amp-story-page>
       <amp-story-page id="page-2">
         <amp-story-grid-layer template="thirds">
-          <amp-img alt="An image" src="test.com/image.jpg" width="900" height="1600" layout="responsive" style="padding-top: 500px;" grid-area="upper-third" />
+          <amp-img alt="An image" src="test.com/image.jpg" width="900" height="1600" layout="responsive" style="padding-top: 500px;" grid-area="upper-third"></amp-img>
           <amp-video width="900" height="1600" layout="responsive" poster="test.com/poster.jpg" loop autoplay style="padding-top: 500px;" grid-area="middle-third">
             <source src="test.com/video.mp4" type="video/mp4" />
           </amp-video>
