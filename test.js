@@ -149,6 +149,7 @@ test('parsing', (t) => {
         ],
       },
     ],
+    canonicalUrl: 'https://mic.com/stories/1',
   });
 
   const expected = `<!doctype html>
@@ -159,7 +160,7 @@ test('parsing', (t) => {
     <script async custom-element="amp-story" src="https://stamp-prototype.appspot.com/v0/amp-story-0.1.js"></script>
     <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
     <title>A test story</title>
-    <link rel="canonical" href="http://example.ampproject.org/my-stamp.html" />
+    <link rel="canonical" href="https://mic.com/stories/1" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <style amp-boilerplate>
       body {
