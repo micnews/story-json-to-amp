@@ -58,7 +58,6 @@
   "dependencies": {
     "dasherize": "^2.0.0",
     "pretty": "^2.0.0",
-    "to-css": "^1.2.1",
-    "xml-beautifier": "^0.3.0"
+    "to-css": "^1.2.1"
   }
 }
