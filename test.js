@@ -30,7 +30,6 @@ test('parsing', (t) => {
             template: 'fill',
             element: {
               type: 'video',
-              source: 'test.com/video.mp4',
               sources: [
                 {
                   source: 'test.com/video.mp4',
@@ -117,7 +116,10 @@ test('parsing', (t) => {
               },
               {
                 type: 'video',
-                source: 'test.com/video.mp4',
+                sources: [{
+                  source: 'test.com/video.mp4',
+                  type: 'mp4',
+                }],
                 width: 900,
                 height: 1600,
                 layout: 'responsive',
@@ -273,7 +275,9 @@ test('parsing', (t) => {
       <amp-story-page id="page-2">
         <amp-story-grid-layer template="thirds">
           <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" style="padding-top: 500px;" grid-area="upper-third"></amp-img>
-          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4" style="padding-top: 500px;" grid-area="middle-third"></amp-video>
+          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4" style="padding-top: 500px;" grid-area="middle-third">
+            <source type="video/mp4" src="test.com/video.mp4">
+          </amp-video>
           <div style="padding-top: 500px;" grid-area="lower-third">
             <h1>This is a heading inside a container</h1>
           </div>
