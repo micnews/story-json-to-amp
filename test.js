@@ -374,3 +374,138 @@ test('parsing', (t) => {
 
   t.end();
 });
+
+test('analytics', (t) => {
+  const actual = storyJsonToStamp({
+    title: 'A test story',
+    pages: [],
+    canonicalUrl: 'https://mic.com/stories/1',
+    analytics: [{
+      requests: {
+        pageview: 'https://foo.com/pixel?RANDOM',
+      },
+      triggers: {
+        trackPageview: {
+          on: 'visible',
+          request: 'pageview',
+        },
+      },
+    }, {
+      type: 'nielsen',
+      vars: {
+        apid: 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX',
+        apv: '1.0',
+        apn: 'Story',
+        section: 'news',
+        segA: 'Music',
+      },
+    }],
+  });
+
+  const expected = `<!doctype html>
+<html amp amp-story lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
+    <script async custom-element="amp-story" src="https://stamp-prototype.appspot.com/v0/amp-story-0.1.js"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <title>A test story</title>
+    <link rel="canonical" href="https://mic.com/stories/1" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>
+      body {
+        -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+      }
+      @-webkit-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+      @-moz-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+      @-ms-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+      @-o-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+      @keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+    </style>
+    <noscript>
+      <style amp-boilerplate>
+        body {
+          -webkit-animation: none;
+          -moz-animation: none;
+          -ms-animation: none;
+          animation: none;
+        }
+      </style>
+    </noscript>
+    <style>
+    </style>
+  </head>
+  <body>
+    <amp-analytics>
+      <script type="application/json">
+        {
+          "requests": {
+            "pageview": "https://foo.com/pixel?RANDOM"
+          },
+          "triggers": {
+            "trackPageview": {
+              "on": "visible",
+              "request": "pageview"
+            }
+          }
+        }
+      </script>
+    </amp-analytics>
+    <amp-analytics type="nielsen">
+      <script type="application/json">
+        {
+          "vars": {
+            "apid": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+            "apv": "1.0",
+            "apn": "Story",
+            "section": "news",
+            "segA": "Music"
+          }
+        }
+      </script>
+    </amp-analytics>
+    <amp-story></amp-story>
+  </body>
+</html>`;
+
+  t.equal(actual, expected);
+  t.end();
+});
