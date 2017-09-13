@@ -159,7 +159,7 @@ test('parsing', (t) => {
   });
 
   const expected = `<!doctype html>
-<html amp amp-story lang="en">
+<html ⚡ 📖 lang="en">
   <head>
     <meta charset="utf-8">
     <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
@@ -296,7 +296,7 @@ test('parsing', (t) => {
   });
 
   const expectedNoCustomCss = `<!doctype html>
-<html amp amp-story lang="en">
+<html ⚡ 📖 lang="en">
   <head>
     <meta charset="utf-8">
     <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
@@ -403,7 +403,7 @@ test('analytics', (t) => {
   });
 
   const expected = `<!doctype html>
-<html amp amp-story lang="en">
+<html ⚡ 📖 lang="en">
   <head>
     <meta charset="utf-8">
     <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
