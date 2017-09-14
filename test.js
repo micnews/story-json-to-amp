@@ -91,7 +91,7 @@ test('parsing', (t) => {
             elements: [
               {
                 type: 'paragraph',
-                text: 'This is a paragraph\nwith a newline',
+                text: 'This is a paragraph\nwith two\rnewlines\r\nin it',
               },
             ],
           },
@@ -159,7 +159,7 @@ test('parsing', (t) => {
   });
 
   const expected = `<!doctype html>
-<html ⚡ 📖 lang="en">
+<html ⚡ lang="en">
   <head>
     <meta charset="utf-8">
     <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
@@ -250,7 +250,7 @@ test('parsing', (t) => {
     </style>
   </head>
   <body>
-    <amp-story>
+    <amp-story standalone>
       <amp-story-page id="page-0">
         <amp-story-grid-layer template="fill">
           <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4">
@@ -269,7 +269,7 @@ test('parsing', (t) => {
       </amp-story-page>
       <amp-story-page id="page-1">
         <amp-story-grid-layer template="horizontal">
-          <p>This is a paragraph\nwith a newline</p>
+          <p>This is a paragraph<br>with two<br>newlines<br>in it</p>
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-2">
@@ -296,7 +296,7 @@ test('parsing', (t) => {
   });
 
   const expectedNoCustomCss = `<!doctype html>
-<html ⚡ 📖 lang="en">
+<html ⚡ lang="en">
   <head>
     <meta charset="utf-8">
     <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
@@ -366,7 +366,7 @@ test('parsing', (t) => {
     </style>
   </head>
   <body>
-    <amp-story></amp-story>
+    <amp-story standalone></amp-story>
   </body>
 </html>`;
 
@@ -403,7 +403,7 @@ test('analytics', (t) => {
   });
 
   const expected = `<!doctype html>
-<html ⚡ 📖 lang="en">
+<html ⚡ lang="en">
   <head>
     <meta charset="utf-8">
     <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
@@ -502,7 +502,7 @@ test('analytics', (t) => {
         }
       </script>
     </amp-analytics>
-    <amp-story></amp-story>
+    <amp-story standalone></amp-story>
   </body>
 </html>`;
 
