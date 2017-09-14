@@ -91,7 +91,7 @@ test('parsing', (t) => {
             elements: [
               {
                 type: 'paragraph',
-                text: 'This is a paragraph',
+                text: 'This is a paragraph\nwith a newline',
               },
             ],
           },
@@ -269,7 +269,7 @@ test('parsing', (t) => {
       </amp-story-page>
       <amp-story-page id="page-1">
         <amp-story-grid-layer template="horizontal">
-          <p>This is a paragraph</p>
+          <p>This is a paragraph\nwith a newline</p>
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-2">

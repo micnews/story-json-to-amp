@@ -56,9 +56,10 @@
     "tape": "^4.8.0"
   },
   "dependencies": {
+    "condense-newlines": "^0.2.1",
     "dasherize": "^2.0.0",
     "html-tag": "^1.0.0",
-    "pretty": "^2.0.0",
+    "js-beautify": "^1.6.14",
     "to-css": "^1.2.1"
   }
 }
