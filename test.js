@@ -46,6 +46,9 @@ test('parsing', (t) => {
           },
           {
             template: 'vertical',
+            styles: {
+              justifyContent: 'flex-end',
+            },
             elements: [
               {
                 type: 'heading',
@@ -143,6 +146,17 @@ test('parsing', (t) => {
                 },
               },
             ],
+          },
+        ],
+      },
+      {
+        id: 'page-3',
+        layers: [
+          {
+            template: 'vertical',
+            elements: [{
+              type: 'container',
+            }],
           },
         ],
       },
@@ -257,7 +271,7 @@ test('parsing', (t) => {
             <source type="video/mp4" src="test.com/video.mp4">
           </amp-video>
         </amp-story-grid-layer>
-        <amp-story-grid-layer template="vertical">
+        <amp-story-grid-layer template="vertical" style="justify-content: flex-end;">
           <h1 style="font-size: 500px; padding-top: 500px;">This is a heading</h1>
           <h1>This is a heading1</h1>
           <h2>This is a heading2</h2>
@@ -281,6 +295,11 @@ test('parsing', (t) => {
           <div style="padding-top: 500px;" grid-area="lower-third">
             <h1>This is a heading inside a container</h1>
           </div>
+        </amp-story-grid-layer>
+      </amp-story-page>
+      <amp-story-page id="page-3">
+        <amp-story-grid-layer template="vertical">
+          <div></div>
         </amp-story-grid-layer>
       </amp-story-page>
     </amp-story>
