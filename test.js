@@ -158,6 +158,9 @@ test('parsing', (t) => {
               type: 'container',
             }],
           },
+          {
+            template: 'fill',
+          },
         ],
       },
     ],
@@ -301,6 +304,7 @@ test('parsing', (t) => {
         <amp-story-grid-layer template="vertical">
           <div></div>
         </amp-story-grid-layer>
+        <amp-story-grid-layer template="fill"></amp-story-grid-layer>
       </amp-story-page>
     </amp-story>
   </body>
