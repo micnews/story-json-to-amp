@@ -146,6 +146,17 @@ test('parsing', (t) => {
           },
         ],
       },
+      {
+        id: 'page-3',
+        layers: [
+          {
+            template: 'vertical',
+            elements: [{
+              type: 'container',
+            }],
+          },
+        ],
+      },
     ],
     canonicalUrl: 'https://mic.com/stories/1',
     customCss: `@font-face {
@@ -281,6 +292,11 @@ test('parsing', (t) => {
           <div style="padding-top: 500px;" grid-area="lower-third">
             <h1>This is a heading inside a container</h1>
           </div>
+        </amp-story-grid-layer>
+      </amp-story-page>
+      <amp-story-page id="page-3">
+        <amp-story-grid-layer template="vertical">
+          <div></div>
         </amp-story-grid-layer>
       </amp-story-page>
     </amp-story>
