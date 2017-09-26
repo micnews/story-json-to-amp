@@ -1,3 +1,4 @@
+/* @flow */
 /* eslint-disable import/no-extraneous-dependencies */
 
 import test from 'tape';
@@ -6,6 +7,22 @@ import storyJsonToStamp from './lib';
 test('parsing', (t) => {
   const actual = storyJsonToStamp({
     title: 'A test story',
+    canonicalUrl: 'https://mic.com/stories/1',
+    meta: {
+      images: ['mic.com/image'],
+      datePublished: '2015-02-05T08:00:00+08:00',
+      dateModified: '2015-02-05T09:20:00+08:00',
+      author: 'Ryan Campbell',
+      publisher: {
+        name: 'Mic',
+        logo: {
+          url: 'mic.com/logo',
+          height: 100,
+          width: 100,
+        },
+      },
+      description: 'Here be the description',
+    },
     defaultStyles: {
       heading: {
         color: '#fff',
@@ -164,7 +181,6 @@ test('parsing', (t) => {
         ],
       },
     ],
-    canonicalUrl: 'https://mic.com/stories/1',
     customCss: `@font-face {
   font-family: "Test";
   src:
@@ -265,6 +281,37 @@ test('parsing', (t) => {
         font-family: "Graphik", arial;
       }
     </style>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://mic.com/stories/1"
+        },
+        "headline": "A test story",
+        "image": ["mic.com/image"],
+        "datePublished": "2015-02-05T08:00:00+08:00",
+        "dateModified": "2015-02-05T09:20:00+08:00",
+        "author": {
+          "@type": "Person",
+          "name": "Ryan Campbell"
+        },
+        "description": "Here be the description",
+        "publisher": {
+          "publisher": {
+            "@type": "Organization",
+            "name": "Mic",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "mic.com/logo",
+              "height": 100,
+              "width": 100
+            }
+          }
+        }
+      }
+    </script>
   </head>
   <body>
     <amp-story standalone>
@@ -387,6 +434,17 @@ test('parsing', (t) => {
     </noscript>
     <style>
     </style>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://mic.com/stories/1"
+        },
+        "headline": "A test story"
+      }
+    </script>
   </head>
   <body>
     <amp-story standalone></amp-story>
@@ -495,6 +553,17 @@ test('analytics', (t) => {
     </noscript>
     <style>
     </style>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://mic.com/stories/1"
+        },
+        "headline": "A test story"
+      }
+    </script>
   </head>
   <body>
     <amp-analytics>
@@ -525,6 +594,95 @@ test('analytics', (t) => {
         }
       </script>
     </amp-analytics>
+    <amp-story standalone></amp-story>
+  </body>
+</html>`;
+
+  t.equal(actual, expected);
+  t.end();
+});
+
+test('works with no options passed', (t) => {
+  const actual = storyJsonToStamp();
+
+  const expected = `<!doctype html>
+<html ⚡ lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
+    <script async custom-element="amp-story" src="https://stamp-prototype.appspot.com/v0/amp-story-0.1.js"></script>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>
+      body {
+        -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+        animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+      }
+      @-webkit-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+      @-moz-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+      @-ms-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+      @-o-keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+      @keyframes -amp-start {
+        from {
+          visibility: hidden;
+        }
+        to {
+          visibility: visible;
+        }
+      }
+    </style>
+    <noscript>
+      <style amp-boilerplate>
+        body {
+          -webkit-animation: none;
+          -moz-animation: none;
+          -ms-animation: none;
+          animation: none;
+        }
+      </style>
+    </noscript>
+    <style>
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+          "@type": "WebPage"
+        }
+      }
+    </script>
+  </head>
+  <body>
     <amp-story standalone></amp-story>
   </body>
 </html>`;
