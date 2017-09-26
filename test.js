@@ -692,7 +692,7 @@ test('works with no options passed', (t) => {
 });
 
 test('works with meta passed as string', (t) => {
-  const actual = storyJsonToStamp({ meta: 'this is the bad meta' });
+  const actual = storyJsonToStamp({ meta: 'this is custom meta' });
 
   const expected = `<!doctype html>
 <html ⚡ lang="en">
@@ -761,9 +761,7 @@ test('works with meta passed as string', (t) => {
     </noscript>
     <style>
     </style>
-    <script type="application/ld+json">
-      this is the bad meta
-    </script>
+    this is custom meta
   </head>
   <body>
     <amp-story standalone></amp-story>
