@@ -280,6 +280,16 @@ test('parsing', (t) => {
         font-size: 16px;
         font-family: "Graphik", arial;
       }
+      s-1 {
+        font-size: 500px;
+        padding-top: 500px;
+      }
+      s-2 {
+        justify-content: flex-end;
+      }
+      s-3 {
+        padding-top: 500px;
+      }
     </style>
     <script type="application/ld+json">
       {
@@ -321,8 +331,8 @@ test('parsing', (t) => {
             <source type="video/mp4" src="test.com/video.mp4">
           </amp-video>
         </amp-story-grid-layer>
-        <amp-story-grid-layer template="vertical" style="justify-content: flex-end;">
-          <h1 style="font-size: 500px; padding-top: 500px;">This is a heading</h1>
+        <amp-story-grid-layer template="vertical" class="s-2">
+          <h1 class="s-1">This is a heading</h1>
           <h1>This is a heading1</h1>
           <h2>This is a heading2</h2>
           <h3>This is a heading3</h3>
@@ -338,11 +348,11 @@ test('parsing', (t) => {
       </amp-story-page>
       <amp-story-page id="page-2">
         <amp-story-grid-layer template="thirds">
-          <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" style="padding-top: 500px;" grid-area="upper-third"></amp-img>
-          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4" style="padding-top: 500px;" grid-area="middle-third">
+          <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" grid-area="upper-third" class="s-3"></amp-img>
+          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4" grid-area="middle-third" class="s-3">
             <source type="video/mp4" src="test.com/video.mp4">
           </amp-video>
-          <div style="padding-top: 500px;" grid-area="lower-third">
+          <div grid-area="lower-third" class="s-3">
             <h1>This is a heading inside a container</h1>
           </div>
         </amp-story-grid-layer>
