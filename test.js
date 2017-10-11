@@ -280,14 +280,14 @@ test('parsing', (t) => {
         font-size: 16px;
         font-family: "Graphik", arial;
       }
-      s-1 {
+      .s-1 {
         font-size: 500px;
         padding-top: 500px;
       }
-      s-2 {
+      .s-2 {
         justify-content: flex-end;
       }
-      s-3 {
+      .s-3 {
         padding-top: 500px;
       }
     </style>
