@@ -1,6 +1,6 @@
 {
   "name": "@mic/story-json-to-stamp",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Convert story JSON to STAMP HTML.",
   "main": "dist/index.js",
   "scripts": {
