@@ -59,7 +59,9 @@
     "condense-newlines": "^0.2.1",
     "dasherize": "^2.0.0",
     "html-tag": "^1.0.0",
+    "immutable-object-methods": "^1.3.1",
     "js-beautify": "^1.6.14",
+    "lodash.flow": "^3.5.0",
     "to-css": "^1.2.1"
   },
   "miclint": {

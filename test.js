@@ -27,15 +27,15 @@ test('parsing', (t) => {
       heading: {
         color: '#fff',
         backgroundColor: 'rgba(0,0,0,0.5)',
-        padding: '5px',
-        fontSize: '28px',
+        padding: 5,
+        fontSize: 28,
         fontFamily: '"MicSans", arial',
       },
       paragraph: {
         color: '#fff',
         backgroundColor: 'rgba(0,0,0,0.5)',
-        padding: '5px',
-        fontSize: '16px',
+        padding: 5,
+        fontSize: 16,
         fontFamily: '"Graphik", arial',
       },
     },
@@ -71,8 +71,38 @@ test('parsing', (t) => {
                 type: 'heading',
                 text: 'This is a heading',
                 styles: {
-                  fontSize: '500px',
-                  paddingTop: '500px',
+                  shadowOffset: { width: 5, height: 5 },
+                  shadowRadius: 5,
+                  shadowColor: '#000000',
+                  textShadowOffset: { width: 5, height: 5 },
+                  textShadowRadius: 5,
+                  textShadowColor: '#000000',
+                  transform: [
+                    { rotate: '90deg' },
+                    { translateX: 50 },
+                  ],
+                  filter: [
+                    { blur: 3 },
+                    { grayscale: '30%' },
+                  ],
+                  backdropFilter: [
+                    { blur: 3 },
+                    { grayscale: '30%' },
+                  ],
+                  backgroundLinearGradient: {
+                    angle: '50deg',
+                    stops: [{
+                      color: 'red',
+                      distance: 30,
+                    }, {
+                      color: 'blue',
+                      distance: '50%',
+                    }, {
+                      color: 'black',
+                    }],
+                  },
+                  fontSize: 500,
+                  paddingTop: 500,
                 },
               },
               {
@@ -131,7 +161,7 @@ test('parsing', (t) => {
                 height: 1600,
                 layout: 'responsive',
                 styles: {
-                  paddingTop: '500px',
+                  paddingTop: 500,
                 },
               },
               {
@@ -147,7 +177,7 @@ test('parsing', (t) => {
                 loop: true,
                 autoplay: true,
                 styles: {
-                  paddingTop: '500px',
+                  paddingTop: 500,
                 },
               },
               {
@@ -159,7 +189,7 @@ test('parsing', (t) => {
                   },
                 ],
                 styles: {
-                  paddingTop: '500px',
+                  paddingTop: 500,
                 },
               },
             ],
@@ -272,6 +302,7 @@ test('parsing', (t) => {
         padding: 5px;
         font-size: 28px;
         font-family: "MicSans", arial;
+        grid-gap: 0;
       }
       p {
         color: #fff;
@@ -279,16 +310,26 @@ test('parsing', (t) => {
         padding: 5px;
         font-size: 16px;
         font-family: "Graphik", arial;
+        grid-gap: 0;
       }
       .s-1 {
+        transform: rotate(90deg) translateX(50px);
+        filter: blur(3px) grayscale(30%);
+        backdrop-filter: blur(3px) grayscale(30%);
         font-size: 500px;
         padding-top: 500px;
+        box-shadow: 5px 5px 5px #000000;
+        text-shadow: 5px 5px 5px #000000;
+        background: linear-gradient(50deg, red 30px, blue 50%, black);
+        grid-gap: 0;
       }
       .s-2 {
         justify-content: flex-end;
+        grid-gap: 0;
       }
       .s-3 {
         padding-top: 500px;
+        grid-gap: 0;
       }
     </style>
     <script type="application/ld+json">
