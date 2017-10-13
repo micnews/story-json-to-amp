@@ -1,13 +1,13 @@
 /* @flow */
 
-// TODO: refine this type if possible
+// TODO: refine this type if possible; should be hex codes and rgb(a) values
 type ColorType = string;
 
 // This is just to show that these will be converted to `${number}px`,
 // as opposed to other numbers which will be left as they are
 type NumberOfPixelsType = number;
 
-// TODO: refine this type if possible
+// TODO: refine this type if possible; should be strings that end in '%'
 type PercentageType = string;
 
 // TODO: refine this type if possible; see https://developer.mozilla.org/en-US/docs/Web/CSS/angle
