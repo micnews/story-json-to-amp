@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import test from 'tape';
-import storyJsonToStamp from './lib';
+import storyJsonToStamp, { convertToReactInlineStyle } from './lib';
 
 test('parsing', (t) => {
   const actual = storyJsonToStamp({
@@ -820,5 +820,57 @@ test('works with meta passed as string', (t) => {
 </html>`;
 
   t.equal(actual, expected);
+  t.end();
+});
+
+test('exports convertToReactInlineStyle function', (t) => {
+  const actual = convertToReactInlineStyle({
+    shadowOffset: { width: 5, height: 5 },
+    shadowRadius: 5,
+    shadowColor: '#000000',
+    textShadowOffset: { width: 5, height: 5 },
+    textShadowRadius: 5,
+    textShadowColor: '#000000',
+    transform: [
+      { rotate: '90deg' },
+      { translateX: 50 },
+    ],
+    filter: [
+      { blur: 3 },
+      { grayscale: '30%' },
+    ],
+    backdropFilter: [
+      { blur: 3 },
+      { grayscale: '30%' },
+    ],
+    backgroundLinearGradient: {
+      angle: '50deg',
+      stops: [{
+        color: 'red',
+        distance: 30,
+      }, {
+        color: 'blue',
+        distance: '50%',
+      }, {
+        color: 'black',
+      }],
+    },
+    fontSize: 500,
+    paddingTop: 500,
+  });
+
+  const expected = {
+    transform: 'rotate(90deg) translateX(50px)',
+    filter: 'blur(3px) grayscale(30%)',
+    backdropFilter: 'blur(3px) grayscale(30%)',
+    fontSize: '500px',
+    paddingTop: '500px',
+    boxShadow: '5px 5px 5px #000000',
+    textShadow: '5px 5px 5px #000000',
+    background: 'linear-gradient(50deg, red 30px, blue 50%, black)',
+    gridGap: 0,
+  };
+
+  t.deepEqual(actual, expected);
   t.end();
 });
