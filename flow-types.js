@@ -13,7 +13,7 @@ type PercentageType = string;
 // TODO: refine this type if possible; see https://developer.mozilla.org/en-US/docs/Web/CSS/angle
 type AngleType = string;
 
-type StyleOffsetType = { width: number, height: number };
+type StyleOffsetType = { width: number, height: number, };
 
 type TransformType =
   | { perspective: NumberOfPixelsType, }
@@ -28,14 +28,14 @@ type TransformType =
   | { translateY: NumberOfPixelsType, }
   | { skewX: AngleType, }
   | { skewY: AngleType, };
-type TransformsType = $ReadOnlyArray<TransformType>
+type TransformsType = $ReadOnlyArray<TransformType>;
 
 // This list is ever-expanding
 type FilterType =
   | { blur: NumberOfPixelsType, }
   | { brightness: number, }
   | { grayscale: PercentageType, };
-type FiltersType = $ReadOnlyArray<FilterType>
+type FiltersType = $ReadOnlyArray<FilterType>;
 
 type LinearGradientType = {
   direction: AngleType,
