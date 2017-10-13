@@ -1,54 +1,98 @@
 /* @flow */
 
-export type StyleType =
-  | 'position'
-  | 'top'
-  | 'left'
-  | 'bottom'
-  | 'right'
+// TODO: refine this type if possible
+type ColorType = string;
 
-  | 'margin'
-  | 'marginTop'
-  | 'marginBottom'
-  | 'marginRight'
-  | 'marginLeft'
+// This is just to show that these will be converted to `${number}px`,
+// as opposed to other numbers which will be left as they are
+type NumberOfPixelsType = number;
 
-  | 'padding'
-  | 'paddingTop'
-  | 'paddingBottom'
-  | 'paddingRight'
-  | 'paddingLeft'
+// TODO: refine this type if possible
+type PercentageType = string;
 
-  | 'display'
-  | 'flexDirection'
-  | 'justifyContent'
-  | 'justifyItems'
-  | 'alignContent'
-  | 'alignItems'
-  | 'textAlign'
+// TODO: refine this type if possible; see https://developer.mozilla.org/en-US/docs/Web/CSS/angle
+type AngleType = string;
 
-  | 'backgroundColor'
-  | 'backgroundLinearGradient'
-  | 'shadowColor'
-  | 'shadowOffset'
-  | 'shadowRadius'
+type StyleOffsetType = { width: number, height: number };
 
-  | 'color'
-  | 'fontFamily'
-  | 'fontSize'
-  | 'lineHeight'
-  | 'fontStyle'
-  | 'textShadowColor'
-  | 'textShadowOffset'
-  | 'textShadowRadius'
+type TransformType =
+  | { perspective: NumberOfPixelsType, }
+  | { rotate: AngleType, }
+  | { rotateX: AngleType, }
+  | { rotateY: AngleType, }
+  | { rotateZ: AngleType, }
+  | { scale: number, }
+  | { scaleX: number, }
+  | { scaleY: number, }
+  | { translateX: NumberOfPixelsType, }
+  | { translateY: NumberOfPixelsType, }
+  | { skewX: AngleType, }
+  | { skewY: AngleType, };
+type TransformsType = $ReadOnlyArray<TransformType>
 
-  | 'opacity'
-  | 'transform'
-  | 'filter'
-  | 'backdropFilter';
+// This list is ever-expanding
+type FilterType =
+  | { blur: NumberOfPixelsType, }
+  | { brightness: number, }
+  | { grayscale: PercentageType, };
+type FiltersType = $ReadOnlyArray<FilterType>
 
-// TODO: refine this type
-export type StylesType = { [StyleType]: any, };
+type LinearGradientType = {
+  direction: AngleType,
+  stops: $ReadOnlyArray<{
+    color: ColorType,
+    distance?: PercentageType | NumberOfPixelsType,
+  }>,
+};
+
+type FlexParamType = 'flex-start' | 'center' | 'flex-end' | 'stretch';
+
+// This list is ever-expanding
+export type StylesType = {
+  position?: 'relative' | 'absolute',
+  top?: NumberOfPixelsType,
+  left?: NumberOfPixelsType,
+  bottom?: NumberOfPixelsType,
+  right?: NumberOfPixelsType,
+
+  margin?: NumberOfPixelsType,
+  marginTop?: NumberOfPixelsType,
+  marginBottom?: NumberOfPixelsType,
+  marginRight?: NumberOfPixelsType,
+  marginLeft?: NumberOfPixelsType,
+
+  padding?: NumberOfPixelsType,
+  paddingTop?: NumberOfPixelsType,
+  paddingBottom?: NumberOfPixelsType,
+  paddingRight?: NumberOfPixelsType,
+  paddingLeft?: NumberOfPixelsType,
+
+  display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'inline-flex',
+  flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
+  justifyContent?: FlexParamType,
+  alignItems?: FlexParamType,
+  textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify',
+
+  backgroundColor?: ColorType,
+  backgroundLinearGradient?: LinearGradientType,
+  shadowColor?: ColorType,
+  shadowOffset?: StyleOffsetType,
+  shadowRadius?: NumberOfPixelsType,
+
+  color?: ColorType,
+  fontFamily?: string,
+  fontSize?: NumberOfPixelsType,
+  lineHeight?: number,
+  fontStyle?: 'normal' | 'italic',
+  textShadowColor?: ColorType,
+  textShadowOffset?: StyleOffsetType,
+  textShadowRadius?: NumberOfPixelsType,
+
+  opacity?: number,
+  transform?: TransformsType,
+  filter?: FiltersType,
+  backdropFilter?: FiltersType,
+};
 
 type ContainerTypeType = 'container';
 type ImageTypeType = 'image';

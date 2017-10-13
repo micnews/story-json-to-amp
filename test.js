@@ -49,8 +49,8 @@ test('parsing', (t) => {
               type: 'video',
               sources: [
                 {
-                  source: 'test.com/video.mp4',
-                  type: 'mp4',
+                  source: 'test.com/video.m3u8',
+                  type: 'application/x-mpegURL',
                 },
               ],
               width: 900,
@@ -65,6 +65,7 @@ test('parsing', (t) => {
             template: 'vertical',
             styles: {
               justifyContent: 'flex-end',
+              alignItems: 'flex-end',
             },
             elements: [
               {
@@ -80,6 +81,7 @@ test('parsing', (t) => {
                   transform: [
                     { rotate: '90deg' },
                     { translateX: 50 },
+                    { scale: 2 },
                   ],
                   filter: [
                     { blur: 3 },
@@ -90,7 +92,7 @@ test('parsing', (t) => {
                     { grayscale: '30%' },
                   ],
                   backgroundLinearGradient: {
-                    angle: '50deg',
+                    direction: '50deg',
                     stops: [{
                       color: 'red',
                       distance: 30,
@@ -138,6 +140,9 @@ test('parsing', (t) => {
         layers: [
           {
             template: 'horizontal',
+            styles: {
+              justifyContent: 'flex-start',
+            },
             elements: [
               {
                 type: 'paragraph',
@@ -201,6 +206,9 @@ test('parsing', (t) => {
         layers: [
           {
             template: 'vertical',
+            styles: {
+              alignItems: 'flex-end',
+            },
             elements: [{
               type: 'container',
             }],
@@ -313,7 +321,7 @@ test('parsing', (t) => {
         grid-gap: 0;
       }
       .s-1 {
-        transform: rotate(90deg) translateX(50px);
+        transform: rotate(90deg) translateX(50px) scale(2);
         filter: blur(3px) grayscale(30%);
         backdrop-filter: blur(3px) grayscale(30%);
         font-size: 500px;
@@ -325,10 +333,23 @@ test('parsing', (t) => {
       }
       .s-2 {
         justify-content: flex-end;
+        align-items: flex-end;
+        align-content: flex-end;
+        justify-items: flex-end;
         grid-gap: 0;
       }
       .s-3 {
+        justify-content: flex-start;
+        align-content: flex-start;
+        grid-gap: 0;
+      }
+      .s-4 {
         padding-top: 500px;
+        grid-gap: 0;
+      }
+      .s-5 {
+        align-items: flex-end;
+        justify-items: flex-end;
         grid-gap: 0;
       }
     </style>
@@ -368,8 +389,8 @@ test('parsing', (t) => {
     <amp-story standalone>
       <amp-story-page id="page-0">
         <amp-story-grid-layer template="fill">
-          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4">
-            <source type="video/mp4" src="test.com/video.mp4">
+          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.m3u8">
+            <source type="application/x-mpegURL" src="test.com/video.m3u8">
           </amp-video>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="vertical" class="s-2">
@@ -383,23 +404,23 @@ test('parsing', (t) => {
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-1">
-        <amp-story-grid-layer template="horizontal">
+        <amp-story-grid-layer template="horizontal" class="s-3">
           <p>This is a paragraph<br>with two<br>newlines<br>in it</p>
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-2">
         <amp-story-grid-layer template="thirds">
-          <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" grid-area="upper-third" class="s-3"></amp-img>
-          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4" grid-area="middle-third" class="s-3">
+          <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" grid-area="upper-third" class="s-4"></amp-img>
+          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4" grid-area="middle-third" class="s-4">
             <source type="video/mp4" src="test.com/video.mp4">
           </amp-video>
-          <div grid-area="lower-third" class="s-3">
+          <div grid-area="lower-third" class="s-4">
             <h1>This is a heading inside a container</h1>
           </div>
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-3">
-        <amp-story-grid-layer template="vertical">
+        <amp-story-grid-layer template="vertical" class="s-5">
           <div></div>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="fill"></amp-story-grid-layer>
@@ -844,7 +865,7 @@ test('exports convertToReactInlineStyle function', (t) => {
       { grayscale: '30%' },
     ],
     backgroundLinearGradient: {
-      angle: '50deg',
+      direction: '50deg',
       stops: [{
         color: 'red',
         distance: 30,
