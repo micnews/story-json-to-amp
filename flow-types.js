@@ -13,7 +13,9 @@ type PercentageType = string;
 // TODO: refine this type if possible; see https://developer.mozilla.org/en-US/docs/Web/CSS/angle
 type AngleType = string;
 
-type StyleOffsetType = { width: number, height: number, };
+type DistanceType = NumberOfPixelsType | PercentageType;
+
+type StyleOffsetType = { width: NumberOfPixelsType, height: NumberOfPixelsType, };
 
 type TransformType =
   | { perspective: NumberOfPixelsType, }
@@ -24,15 +26,15 @@ type TransformType =
   | { scale: number, }
   | { scaleX: number, }
   | { scaleY: number, }
-  | { translateX: NumberOfPixelsType, }
-  | { translateY: NumberOfPixelsType, }
+  | { translateX: DistanceType, }
+  | { translateY: DistanceType, }
   | { skewX: AngleType, }
   | { skewY: AngleType, };
 type TransformsType = $ReadOnlyArray<TransformType>;
 
-// This list is ever-expanding
 type FilterType =
-  | { blur: NumberOfPixelsType, }
+// This list is ever-expanding
+  | { blur: DistanceType, }
   | { brightness: number, }
   | { grayscale: PercentageType, };
 type FiltersType = $ReadOnlyArray<FilterType>;
@@ -41,29 +43,28 @@ type LinearGradientType = {
   direction: AngleType,
   stops: $ReadOnlyArray<{
     color: ColorType,
-    distance?: PercentageType | NumberOfPixelsType,
+    distance?: DistanceType,
   }>,
 };
 
-// This list is ever-expanding
 export type StylesType = {
   position?: 'relative' | 'absolute',
-  top?: NumberOfPixelsType,
-  left?: NumberOfPixelsType,
-  bottom?: NumberOfPixelsType,
-  right?: NumberOfPixelsType,
+  top?: DistanceType,
+  left?: DistanceType,
+  bottom?: DistanceType,
+  right?: DistanceType,
 
-  margin?: NumberOfPixelsType,
-  marginTop?: NumberOfPixelsType,
-  marginBottom?: NumberOfPixelsType,
-  marginRight?: NumberOfPixelsType,
-  marginLeft?: NumberOfPixelsType,
+  margin?: DistanceType,
+  marginTop?: DistanceType,
+  marginBottom?: DistanceType,
+  marginRight?: DistanceType,
+  marginLeft?: DistanceType,
 
-  padding?: NumberOfPixelsType,
-  paddingTop?: NumberOfPixelsType,
-  paddingBottom?: NumberOfPixelsType,
-  paddingRight?: NumberOfPixelsType,
-  paddingLeft?: NumberOfPixelsType,
+  padding?: DistanceType,
+  paddingTop?: DistanceType,
+  paddingBottom?: DistanceType,
+  paddingRight?: DistanceType,
+  paddingLeft?: DistanceType,
 
   display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'inline-flex',
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
@@ -79,7 +80,7 @@ export type StylesType = {
 
   color?: ColorType,
   fontFamily?: string,
-  fontSize?: NumberOfPixelsType,
+  fontSize?: DistanceType,
   lineHeight?: number,
   fontStyle?: 'normal' | 'italic',
   textShadowColor?: ColorType,
