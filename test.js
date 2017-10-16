@@ -72,12 +72,16 @@ test('parsing', (t) => {
                 type: 'heading',
                 text: 'This is a heading',
                 styles: {
-                  shadowOffset: { width: 5, height: 5 },
-                  shadowRadius: 5,
-                  shadowColor: '#000000',
-                  textShadowOffset: { width: 5, height: 5 },
-                  textShadowRadius: 5,
-                  textShadowColor: '#000000',
+                  boxShadow: {
+                    offset: { width: 5, height: 5 },
+                    radius: 5,
+                    color: '#000000',
+                  },
+                  textShadow: [{
+                    offset: { width: 5, height: 5 },
+                    radius: 5,
+                    color: '#000000',
+                  }],
                   transform: [
                     { rotate: '90deg' },
                     { translateX: '50%' },
@@ -322,6 +326,9 @@ test('parsing', (t) => {
         grid-gap: 0;
       }
       .s-1 {
+        webkit-box-shadow: 5px 5px 5px #000000;
+        box-shadow: 5px 5px 5px #000000;
+        text-shadow: 5px 5px 5px #000000;
         webkit-transform: rotate(90deg) translateX(50%) translateY(50px) scale(2);
         transform: rotate(90deg) translateX(50%) translateY(50px) scale(2);
         webkit-filter: blur(3px) grayscale(30%);
@@ -330,9 +337,6 @@ test('parsing', (t) => {
         backdrop-filter: blur(3px) grayscale(30%);
         font-size: 500px;
         padding-top: 500px;
-        webkit-box-shadow: 5px 5px 5px #000000;
-        box-shadow: 5px 5px 5px #000000;
-        text-shadow: 5px 5px 5px #000000;
         background: linear-gradient(50deg, red 30px, blue 50%, black);
         grid-gap: 0;
       }
@@ -861,12 +865,16 @@ test('works with meta passed as string', (t) => {
 
 test('exports convertToReactInlineStyle function', (t) => {
   const actual = convertToReactInlineStyle({
-    shadowOffset: { width: 5, height: 5 },
-    shadowRadius: 5,
-    shadowColor: '#000000',
-    textShadowOffset: { width: 5, height: 5 },
-    textShadowRadius: 5,
-    textShadowColor: '#000000',
+    boxShadow: {
+      offset: { width: 5, height: 5 },
+      radius: 5,
+      color: '#000000',
+    },
+    textShadow: [{
+      offset: { width: 5, height: 5 },
+      radius: 5,
+      color: '#000000',
+    }],
     transform: [
       { rotate: '90deg' },
       { translateX: 50 },
