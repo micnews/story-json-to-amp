@@ -169,7 +169,7 @@ export type FillLayerType<E: ?ElementType, S: ?StylesType> = {|
   styles?: S,
 |};
 
-type ThirdsPageLayerType<E: ?[ ElementType, ElementType, ElementType, ], S: ?StylesType> = {
+export type ThirdsPageLayerType<E: ?[ ElementType, ElementType, ElementType, ], S: ?StylesType> = {
   template: 'thirds',
   elements?: E,
   styles?: S,
