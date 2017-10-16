@@ -147,7 +147,8 @@ type VideoElementPropsType = {
   layout: MediaLayoutType,
   poster?: string,
 };
-type VideoElementType<S: ?StylesType> = ElementCreatorType<VideoTypeType, S, VideoElementPropsType>;
+export type VideoElementType<S: ?StylesType> =
+  ElementCreatorType<VideoTypeType, S, VideoElementPropsType>;
 
 export type MediaElementType = ImageElementType<*> | VideoElementType<*>;
 
