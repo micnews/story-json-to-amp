@@ -80,7 +80,7 @@ test('parsing', (t) => {
                   textShadowColor: '#000000',
                   transform: [
                     { rotate: '90deg' },
-                    { translateX: 50 },
+                    { translateX: '50%' },
                     { scale: 2 },
                   ],
                   filter: [
@@ -321,8 +321,8 @@ test('parsing', (t) => {
         grid-gap: 0;
       }
       .s-1 {
-        webkit-transform: rotate(90deg) translateX(50px) scale(2);
-        transform: rotate(90deg) translateX(50px) scale(2);
+        webkit-transform: rotate(90deg) translateX(50%) scale(2);
+        transform: rotate(90deg) translateX(50%) scale(2);
         webkit-filter: blur(3px) grayscale(30%);
         filter: blur(3px) grayscale(30%);
         webkit-backdrop-filter: blur(3px) grayscale(30%);

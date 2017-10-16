@@ -13,7 +13,9 @@ type PercentageType = string;
 // TODO: refine this type if possible; see https://developer.mozilla.org/en-US/docs/Web/CSS/angle
 type AngleType = string;
 
-type StyleOffsetType = { width: number, height: number, };
+type DistanceType = NumberOfPixelsType | PercentageType;
+
+type StyleOffsetType = { width: NumberOfPixelsType, height: NumberOfPixelsType, };
 
 type TransformType =
   | { perspective: NumberOfPixelsType, }
@@ -24,15 +26,15 @@ type TransformType =
   | { scale: number, }
   | { scaleX: number, }
   | { scaleY: number, }
-  | { translateX: NumberOfPixelsType, }
-  | { translateY: NumberOfPixelsType, }
+  | { translateX: DistanceType, }
+  | { translateY: DistanceType, }
   | { skewX: AngleType, }
   | { skewY: AngleType, };
 type TransformsType = $ReadOnlyArray<TransformType>;
 
-// This list is ever-expanding
 type FilterType =
-  | { blur: NumberOfPixelsType, }
+// This list is ever-expanding
+  | { blur: DistanceType, }
   | { brightness: number, }
   | { grayscale: PercentageType, };
 type FiltersType = $ReadOnlyArray<FilterType>;
@@ -41,29 +43,28 @@ type LinearGradientType = {
   direction: AngleType,
   stops: $ReadOnlyArray<{
     color: ColorType,
-    distance?: PercentageType | NumberOfPixelsType,
+    distance?: DistanceType,
   }>,
 };
 
-// This list is ever-expanding
 export type StylesType = {
   position?: 'relative' | 'absolute',
-  top?: NumberOfPixelsType,
-  left?: NumberOfPixelsType,
-  bottom?: NumberOfPixelsType,
-  right?: NumberOfPixelsType,
+  top?: DistanceType,
+  left?: DistanceType,
+  bottom?: DistanceType,
+  right?: DistanceType,
 
-  margin?: NumberOfPixelsType,
-  marginTop?: NumberOfPixelsType,
-  marginBottom?: NumberOfPixelsType,
-  marginRight?: NumberOfPixelsType,
-  marginLeft?: NumberOfPixelsType,
+  margin?: DistanceType,
+  marginTop?: DistanceType,
+  marginBottom?: DistanceType,
+  marginRight?: DistanceType,
+  marginLeft?: DistanceType,
 
-  padding?: NumberOfPixelsType,
-  paddingTop?: NumberOfPixelsType,
-  paddingBottom?: NumberOfPixelsType,
-  paddingRight?: NumberOfPixelsType,
-  paddingLeft?: NumberOfPixelsType,
+  padding?: DistanceType,
+  paddingTop?: DistanceType,
+  paddingBottom?: DistanceType,
+  paddingRight?: DistanceType,
+  paddingLeft?: DistanceType,
 
   display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'inline-flex',
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
@@ -79,7 +80,7 @@ export type StylesType = {
 
   color?: ColorType,
   fontFamily?: string,
-  fontSize?: NumberOfPixelsType,
+  fontSize?: DistanceType,
   lineHeight?: number,
   fontStyle?: 'normal' | 'italic',
   textShadowColor?: ColorType,
@@ -111,14 +112,15 @@ export type ElementTypeType =
 
 export type ElementStylesType = { [ElementTypeType]: StylesType, };
 
-type ElementCreatorType<Type: ElementTypeType, Props: Object> = Props & {
-  type: Type,
-  styles?: StylesType,
-  thirdIndex?: 0 | 1 | 2,
+type ElementCreatorType<T: ElementTypeType, S: ?StylesType, Props: Object> = Props & {
+  type: T,
+  styles?: S,
 };
 
-// eslint-disable-next-line no-use-before-define
-type ContainerType = ElementCreatorType<ContainerTypeType, { elements?: Array<ElementType>, }>;
+export type ContainerElementType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType>
+  = ElementCreatorType<ContainerTypeType, S, {
+  elements?: E,
+}>;
 
 type MediaLayoutType = 'fill' | 'fixed' | 'fixed-height' | 'flex-item' | 'nodisplay' | 'responsive';
 
@@ -129,53 +131,71 @@ type ImageElementPropsType = {
   height: string | number,
   layout: MediaLayoutType,
 };
-type ImageElementType = ElementCreatorType<ImageTypeType, ImageElementPropsType>;
+export type ImageElementType<S: ?StylesType> =
+  ElementCreatorType<ImageTypeType, S, ImageElementPropsType>;
 
 type VideoSourceType = {
   source: string,
   type: string,
 };
 type VideoElementPropsType = {
-  sources: Array<VideoSourceType>,
+  sources: $ReadOnlyArray<VideoSourceType>,
   loop?: true,
   autoplay?: true,
-  width: number,
-  height: number,
+  width: string | number,
+  height: string | number,
   layout: MediaLayoutType,
   poster?: string,
 };
-type VideoElementType = ElementCreatorType<VideoTypeType, VideoElementPropsType>;
+type VideoElementType<S: ?StylesType> = ElementCreatorType<VideoTypeType, S, VideoElementPropsType>;
 
-type TextElementType = ElementCreatorType<HeadingTypeType | ParagraphTypeType, { text: string, }>;
+export type MediaElementType = ImageElementType<*> | VideoElementType<*>;
 
-type ElementType =
-  ContainerType |
-  TextElementType |
-  ImageElementType |
-  VideoElementType;
+type TextElementType<T: HeadingTypeType | ParagraphTypeType, S: ?StylesType>
+  = ElementCreatorType<T, S, { text: string, }>;
+export type HeadingElementType<S: ?StylesType> = TextElementType<HeadingTypeType, S>;
+export type ParagraphElementType<S: ?StylesType> = TextElementType<ParagraphTypeType, S>;
 
-type FillPageLayerType = {
+export type ElementType =
+  | ContainerElementType<*, *>
+  | TextElementType<*, *>
+  | ImageElementType<*>
+  | VideoElementType<*>;
+
+export type FillLayerType<E: ?ElementType, S: ?StylesType> = {|
   template: 'fill',
-  element?: ElementType,
-  styles?: StylesType,
-};
+  element?: E,
+  styles?: S,
+|};
 
-type ThirdsPageLayerType = {
+type ThirdsPageLayerType<E: ?[ ElementType, ElementType, ElementType, ], S: ?StylesType> = {
   template: 'thirds',
-  elements?: [ ElementType, ElementType, ElementType, ],
-  styles?: StylesType,
+  elements?: E,
+  styles?: S,
 };
 
-type PageLayerType = FillPageLayerType | ThirdsPageLayerType | {
-  template: 'vertical' | 'horizontal',
-  elements?: Array<ElementType>,
-  styles?: StylesType,
-};
+export type VerticalLayerType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType> = {|
+  template: 'vertical',
+  elements?: E,
+  styles?: S,
+|};
 
-type PageType = {
+export type HorizontalLayerType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType> = {|
+  template: 'horizontal',
+  elements?: E,
+  styles?: S,
+|};
+
+export type LayerType =
+  | FillLayerType<*, *>
+  | ThirdsPageLayerType<*, *>
+  | VerticalLayerType<*, *>
+  | HorizontalLayerType<*, *>;
+
+export type PageType<L: ?$ReadOnlyArray<LayerType>> = {|
   id: string,
-  layers: Array<PageLayerType>,
-};
+  layers: L,
+|};
 
 export type StoryAnalyticsType = {
   type?: string,
@@ -193,7 +213,7 @@ export type StoryAnalyticsType = {
 export type StoryMetaType = {
   title?: string,
   canonicalUrl?: string,
-  images?: Array<string>,
+  images?: $ReadOnlyArray<string>,
   datePublished?: string,
   dateModified?: string,
   author?: string,
@@ -213,7 +233,7 @@ export type StoryType = {
   meta?: string | StoryMetaType,
   customCss?: string,
   defaultStyles?: { [ElementTypeType]: StylesType, },
-  pages?: Array<PageType>,
+  pages?: $ReadOnlyArray<PageType<*>>,
   canonicalUrl?: string,
-  analytics?: Array<StoryAnalyticsType>,
+  analytics?: $ReadOnlyArray<StoryAnalyticsType>,
 };
