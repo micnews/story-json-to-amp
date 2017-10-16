@@ -1,13 +1,98 @@
 /* @flow */
 
-type StyleType =
-  'background' | 'backgroundColor' |
-  'color' | 'fontFamily' | 'fontSize' |
-  'margin' | 'marginTop' | 'marginBottom' | 'marginRight' | 'marginLeft' |
-  'padding' | 'paddingTop' | 'paddingBottom' | 'paddingRight' | 'paddingLeft' |
-  'justifyContent' | 'justifyItems' | 'alignItems' | 'alignContent';
+// TODO: refine this type if possible; should be hex codes and rgb(a) values
+type ColorType = string;
 
-export type StylesType = { [StyleType]: string, };
+// This is just to show that these will be converted to `${number}px`,
+// as opposed to other numbers which will be left as they are
+type NumberOfPixelsType = number;
+
+// TODO: refine this type if possible; should be strings that end in '%'
+type PercentageType = string;
+
+// TODO: refine this type if possible; see https://developer.mozilla.org/en-US/docs/Web/CSS/angle
+type AngleType = string;
+
+type StyleOffsetType = { width: number, height: number, };
+
+type TransformType =
+  | { perspective: NumberOfPixelsType, }
+  | { rotate: AngleType, }
+  | { rotateX: AngleType, }
+  | { rotateY: AngleType, }
+  | { rotateZ: AngleType, }
+  | { scale: number, }
+  | { scaleX: number, }
+  | { scaleY: number, }
+  | { translateX: NumberOfPixelsType, }
+  | { translateY: NumberOfPixelsType, }
+  | { skewX: AngleType, }
+  | { skewY: AngleType, };
+type TransformsType = $ReadOnlyArray<TransformType>;
+
+// This list is ever-expanding
+type FilterType =
+  | { blur: NumberOfPixelsType, }
+  | { brightness: number, }
+  | { grayscale: PercentageType, };
+type FiltersType = $ReadOnlyArray<FilterType>;
+
+type LinearGradientType = {
+  direction: AngleType,
+  stops: $ReadOnlyArray<{
+    color: ColorType,
+    distance?: PercentageType | NumberOfPixelsType,
+  }>,
+};
+
+type FlexParamType = 'flex-start' | 'center' | 'flex-end' | 'stretch';
+
+// This list is ever-expanding
+export type StylesType = {
+  position?: 'relative' | 'absolute',
+  top?: NumberOfPixelsType,
+  left?: NumberOfPixelsType,
+  bottom?: NumberOfPixelsType,
+  right?: NumberOfPixelsType,
+
+  margin?: NumberOfPixelsType,
+  marginTop?: NumberOfPixelsType,
+  marginBottom?: NumberOfPixelsType,
+  marginRight?: NumberOfPixelsType,
+  marginLeft?: NumberOfPixelsType,
+
+  padding?: NumberOfPixelsType,
+  paddingTop?: NumberOfPixelsType,
+  paddingBottom?: NumberOfPixelsType,
+  paddingRight?: NumberOfPixelsType,
+  paddingLeft?: NumberOfPixelsType,
+
+  display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'inline-flex',
+  flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
+  justifyContent?: FlexParamType,
+  alignItems?: FlexParamType,
+  textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify',
+
+  backgroundColor?: ColorType,
+  backgroundLinearGradient?: LinearGradientType,
+  shadowColor?: ColorType,
+  shadowOffset?: StyleOffsetType,
+  shadowRadius?: NumberOfPixelsType,
+
+  color?: ColorType,
+  fontFamily?: string,
+  fontSize?: NumberOfPixelsType,
+  lineHeight?: number,
+  fontStyle?: 'normal' | 'italic',
+  textShadowColor?: ColorType,
+  textShadowOffset?: StyleOffsetType,
+  textShadowRadius?: NumberOfPixelsType,
+
+  opacity?: number,
+  transform?: TransformsType,
+  filter?: FiltersType,
+  backdropFilter?: FiltersType,
+};
 
 type ContainerTypeType = 'container';
 type ImageTypeType = 'image';

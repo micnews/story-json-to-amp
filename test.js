@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import test from 'tape';
-import storyJsonToStamp from './lib';
+import storyJsonToStamp, { convertToReactInlineStyle } from './lib';
 
 test('parsing', (t) => {
   const actual = storyJsonToStamp({
@@ -27,15 +27,15 @@ test('parsing', (t) => {
       heading: {
         color: '#fff',
         backgroundColor: 'rgba(0,0,0,0.5)',
-        padding: '5px',
-        fontSize: '28px',
+        padding: 5,
+        fontSize: 28,
         fontFamily: '"MicSans", arial',
       },
       paragraph: {
         color: '#fff',
         backgroundColor: 'rgba(0,0,0,0.5)',
-        padding: '5px',
-        fontSize: '16px',
+        padding: 5,
+        fontSize: 16,
         fontFamily: '"Graphik", arial',
       },
     },
@@ -49,8 +49,8 @@ test('parsing', (t) => {
               type: 'video',
               sources: [
                 {
-                  source: 'test.com/video.mp4',
-                  type: 'mp4',
+                  source: 'test.com/video.m3u8',
+                  type: 'application/x-mpegURL',
                 },
               ],
               width: 900,
@@ -65,14 +65,46 @@ test('parsing', (t) => {
             template: 'vertical',
             styles: {
               justifyContent: 'flex-end',
+              alignItems: 'flex-end',
             },
             elements: [
               {
                 type: 'heading',
                 text: 'This is a heading',
                 styles: {
-                  fontSize: '500px',
-                  paddingTop: '500px',
+                  shadowOffset: { width: 5, height: 5 },
+                  shadowRadius: 5,
+                  shadowColor: '#000000',
+                  textShadowOffset: { width: 5, height: 5 },
+                  textShadowRadius: 5,
+                  textShadowColor: '#000000',
+                  transform: [
+                    { rotate: '90deg' },
+                    { translateX: 50 },
+                    { scale: 2 },
+                  ],
+                  filter: [
+                    { blur: 3 },
+                    { grayscale: '30%' },
+                  ],
+                  backdropFilter: [
+                    { blur: 3 },
+                    { grayscale: '30%' },
+                  ],
+                  backgroundLinearGradient: {
+                    direction: '50deg',
+                    stops: [{
+                      color: 'red',
+                      distance: 30,
+                    }, {
+                      color: 'blue',
+                      distance: '50%',
+                    }, {
+                      color: 'black',
+                    }],
+                  },
+                  fontSize: 500,
+                  paddingTop: 500,
                 },
               },
               {
@@ -108,6 +140,9 @@ test('parsing', (t) => {
         layers: [
           {
             template: 'horizontal',
+            styles: {
+              justifyContent: 'flex-start',
+            },
             elements: [
               {
                 type: 'paragraph',
@@ -131,7 +166,7 @@ test('parsing', (t) => {
                 height: 1600,
                 layout: 'responsive',
                 styles: {
-                  paddingTop: '500px',
+                  paddingTop: 500,
                 },
               },
               {
@@ -147,7 +182,7 @@ test('parsing', (t) => {
                 loop: true,
                 autoplay: true,
                 styles: {
-                  paddingTop: '500px',
+                  paddingTop: 500,
                 },
               },
               {
@@ -159,7 +194,7 @@ test('parsing', (t) => {
                   },
                 ],
                 styles: {
-                  paddingTop: '500px',
+                  paddingTop: 500,
                 },
               },
             ],
@@ -171,6 +206,9 @@ test('parsing', (t) => {
         layers: [
           {
             template: 'vertical',
+            styles: {
+              alignItems: 'flex-end',
+            },
             elements: [{
               type: 'container',
             }],
@@ -272,6 +310,7 @@ test('parsing', (t) => {
         padding: 5px;
         font-size: 28px;
         font-family: "MicSans", arial;
+        grid-gap: 0;
       }
       p {
         color: #fff;
@@ -279,16 +318,53 @@ test('parsing', (t) => {
         padding: 5px;
         font-size: 16px;
         font-family: "Graphik", arial;
+        grid-gap: 0;
       }
       .s-1 {
+        webkit-transform: rotate(90deg) translateX(50px) scale(2);
+        transform: rotate(90deg) translateX(50px) scale(2);
+        webkit-filter: blur(3px) grayscale(30%);
+        filter: blur(3px) grayscale(30%);
+        webkit-backdrop-filter: blur(3px) grayscale(30%);
+        backdrop-filter: blur(3px) grayscale(30%);
         font-size: 500px;
         padding-top: 500px;
+        webkit-box-shadow: 5px 5px 5px #000000;
+        box-shadow: 5px 5px 5px #000000;
+        text-shadow: 5px 5px 5px #000000;
+        background: linear-gradient(50deg, red 30px, blue 50%, black);
+        grid-gap: 0;
       }
       .s-2 {
+        webkit-box-pack: end;
+        ms-flex-pack: end;
         justify-content: flex-end;
+        webkit-box-align: end;
+        ms-flex-align: end;
+        align-items: flex-end;
+        ms-flex-line-pack: end;
+        align-content: flex-end;
+        justify-items: flex-end;
+        grid-gap: 0;
       }
       .s-3 {
+        webkit-box-pack: start;
+        ms-flex-pack: start;
+        justify-content: flex-start;
+        ms-flex-line-pack: start;
+        align-content: flex-start;
+        grid-gap: 0;
+      }
+      .s-4 {
         padding-top: 500px;
+        grid-gap: 0;
+      }
+      .s-5 {
+        webkit-box-align: end;
+        ms-flex-align: end;
+        align-items: flex-end;
+        justify-items: flex-end;
+        grid-gap: 0;
       }
     </style>
     <script type="application/ld+json">
@@ -327,8 +403,8 @@ test('parsing', (t) => {
     <amp-story standalone>
       <amp-story-page id="page-0">
         <amp-story-grid-layer template="fill">
-          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4">
-            <source type="video/mp4" src="test.com/video.mp4">
+          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.m3u8">
+            <source type="application/x-mpegURL" src="test.com/video.m3u8">
           </amp-video>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="vertical" class="s-2">
@@ -342,23 +418,23 @@ test('parsing', (t) => {
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-1">
-        <amp-story-grid-layer template="horizontal">
+        <amp-story-grid-layer template="horizontal" class="s-3">
           <p>This is a paragraph<br>with two<br>newlines<br>in it</p>
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-2">
         <amp-story-grid-layer template="thirds">
-          <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" grid-area="upper-third" class="s-3"></amp-img>
-          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4" grid-area="middle-third" class="s-3">
+          <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" grid-area="upper-third" class="s-4"></amp-img>
+          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4" grid-area="middle-third" class="s-4">
             <source type="video/mp4" src="test.com/video.mp4">
           </amp-video>
-          <div grid-area="lower-third" class="s-3">
+          <div grid-area="lower-third" class="s-4">
             <h1>This is a heading inside a container</h1>
           </div>
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-3">
-        <amp-story-grid-layer template="vertical">
+        <amp-story-grid-layer template="vertical" class="s-5">
           <div></div>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="fill"></amp-story-grid-layer>
@@ -779,5 +855,57 @@ test('works with meta passed as string', (t) => {
 </html>`;
 
   t.equal(actual, expected);
+  t.end();
+});
+
+test('exports convertToReactInlineStyle function', (t) => {
+  const actual = convertToReactInlineStyle({
+    shadowOffset: { width: 5, height: 5 },
+    shadowRadius: 5,
+    shadowColor: '#000000',
+    textShadowOffset: { width: 5, height: 5 },
+    textShadowRadius: 5,
+    textShadowColor: '#000000',
+    transform: [
+      { rotate: '90deg' },
+      { translateX: 50 },
+    ],
+    filter: [
+      { blur: 3 },
+      { grayscale: '30%' },
+    ],
+    backdropFilter: [
+      { blur: 3 },
+      { grayscale: '30%' },
+    ],
+    backgroundLinearGradient: {
+      direction: '50deg',
+      stops: [{
+        color: 'red',
+        distance: 30,
+      }, {
+        color: 'blue',
+        distance: '50%',
+      }, {
+        color: 'black',
+      }],
+    },
+    fontSize: 500,
+    paddingTop: 500,
+  });
+
+  const expected = {
+    transform: 'rotate(90deg) translateX(50px)',
+    filter: 'blur(3px) grayscale(30%)',
+    backdropFilter: 'blur(3px) grayscale(30%)',
+    fontSize: '500px',
+    paddingTop: '500px',
+    boxShadow: '5px 5px 5px #000000',
+    textShadow: '5px 5px 5px #000000',
+    background: 'linear-gradient(50deg, red 30px, blue 50%, black)',
+    gridGap: 0,
+  };
+
+  t.deepEqual(actual, expected);
   t.end();
 });
