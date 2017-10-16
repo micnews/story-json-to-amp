@@ -45,8 +45,6 @@ type LinearGradientType = {
   }>,
 };
 
-type FlexParamType = 'flex-start' | 'center' | 'flex-end' | 'stretch';
-
 // This list is ever-expanding
 export type StylesType = {
   position?: 'relative' | 'absolute',
@@ -69,8 +67,8 @@ export type StylesType = {
 
   display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'inline-flex',
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
-  justifyContent?: FlexParamType,
-  alignItems?: FlexParamType,
+  justifyContent?: 'flex-start' | 'center' | 'flex-end' | 'space-around' | 'space-between',
+  alignItems?: 'flex-start' | 'center' | 'flex-end' | 'stretch',
   textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify',
 
   backgroundColor?: ColorType,
