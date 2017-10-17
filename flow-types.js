@@ -15,8 +15,6 @@ type AngleType = string;
 
 type DistanceType = NumberOfPixelsType | PercentageType;
 
-type StyleOffsetType = { width: NumberOfPixelsType, height: NumberOfPixelsType, };
-
 type TransformType =
   | { perspective: NumberOfPixelsType, }
   | { rotate: AngleType, }
@@ -47,6 +45,12 @@ type LinearGradientType = {
   }>,
 };
 
+type ShadowType = {
+  offset: { width: NumberOfPixelsType, height: NumberOfPixelsType, },
+  color?: ColorType,
+  radius?: NumberOfPixelsType,
+};
+
 export type StylesType = {
   position?: 'relative' | 'absolute',
   top?: DistanceType,
@@ -66,6 +70,12 @@ export type StylesType = {
   paddingRight?: DistanceType,
   paddingLeft?: DistanceType,
 
+  border?: DistanceType,
+  borderTop?: DistanceType,
+  borderBottom?: DistanceType,
+  borderRight?: DistanceType,
+  borderLeft?: DistanceType,
+
   display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'inline-flex',
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
   justifyContent?: 'flex-start' | 'center' | 'flex-end' | 'space-around' | 'space-between',
@@ -74,18 +84,14 @@ export type StylesType = {
 
   backgroundColor?: ColorType,
   backgroundLinearGradient?: LinearGradientType,
-  shadowColor?: ColorType,
-  shadowOffset?: StyleOffsetType,
-  shadowRadius?: NumberOfPixelsType,
+  boxShadow?: ShadowType | $ReadOnlyArray<ShadowType>,
 
   color?: ColorType,
   fontFamily?: string,
   fontSize?: DistanceType,
   lineHeight?: number,
   fontStyle?: 'normal' | 'italic',
-  textShadowColor?: ColorType,
-  textShadowOffset?: StyleOffsetType,
-  textShadowRadius?: NumberOfPixelsType,
+  textShadow?: ShadowType | $ReadOnlyArray<ShadowType>,
 
   opacity?: number,
   transform?: TransformsType,
