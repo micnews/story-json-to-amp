@@ -326,14 +326,14 @@ test('parsing', (t) => {
         grid-gap: 0;
       }
       .s-1 {
-        webkit-box-shadow: 5px 5px 5px #000000;
+        -webkit-box-shadow: 5px 5px 5px #000000;
         box-shadow: 5px 5px 5px #000000;
         text-shadow: 5px 5px 5px #000000;
-        webkit-transform: rotate(90deg) translateX(50%) translateY(50px) scale(2);
+        -webkit-transform: rotate(90deg) translateX(50%) translateY(50px) scale(2);
         transform: rotate(90deg) translateX(50%) translateY(50px) scale(2);
-        webkit-filter: blur(3px) grayscale(30%);
+        -webkit-filter: blur(3px) grayscale(30%);
         filter: blur(3px) grayscale(30%);
-        webkit-backdrop-filter: blur(3px) grayscale(30%);
+        -webkit-backdrop-filter: blur(3px) grayscale(30%);
         backdrop-filter: blur(3px) grayscale(30%);
         font-size: 500px;
         padding-top: 500px;
@@ -341,22 +341,22 @@ test('parsing', (t) => {
         grid-gap: 0;
       }
       .s-2 {
-        webkit-box-pack: end;
-        ms-flex-pack: end;
+        -webkit-box-pack: end;
+        -ms-flex-pack: end;
         justify-content: flex-end;
-        webkit-box-align: end;
-        ms-flex-align: end;
+        -webkit-box-align: end;
+        -ms-flex-align: end;
         align-items: flex-end;
-        ms-flex-line-pack: end;
+        -ms-flex-line-pack: end;
         align-content: flex-end;
         justify-items: flex-end;
         grid-gap: 0;
       }
       .s-3 {
-        webkit-box-pack: start;
-        ms-flex-pack: start;
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
         justify-content: flex-start;
-        ms-flex-line-pack: start;
+        -ms-flex-line-pack: start;
         align-content: flex-start;
         grid-gap: 0;
       }
@@ -365,8 +365,8 @@ test('parsing', (t) => {
         grid-gap: 0;
       }
       .s-5 {
-        webkit-box-align: end;
-        ms-flex-align: end;
+        -webkit-box-align: end;
+        -ms-flex-align: end;
         align-items: flex-end;
         justify-items: flex-end;
         grid-gap: 0;
