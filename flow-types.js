@@ -118,14 +118,15 @@ export type ElementTypeType =
 
 export type ElementStylesType = { [ElementTypeType]: StylesType, };
 
-type ElementCreatorType<Type: ElementTypeType, Props: Object> = Props & {
-  type: Type,
-  styles?: StylesType,
-  thirdIndex?: 0 | 1 | 2,
+type ElementCreatorType<T: ElementTypeType, S: ?StylesType, Props: Object> = Props & {
+  type: T,
+  styles?: S,
 };
 
-// eslint-disable-next-line no-use-before-define
-type ContainerType = ElementCreatorType<ContainerTypeType, { elements?: Array<ElementType>, }>;
+export type ContainerElementType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType>
+  = ElementCreatorType<ContainerTypeType, S, {
+  elements?: E,
+}>;
 
 type MediaLayoutType = 'fill' | 'fixed' | 'fixed-height' | 'flex-item' | 'nodisplay' | 'responsive';
 
@@ -136,53 +137,77 @@ type ImageElementPropsType = {
   height: string | number,
   layout: MediaLayoutType,
 };
-type ImageElementType = ElementCreatorType<ImageTypeType, ImageElementPropsType>;
+export type ImageElementType<S: ?StylesType> =
+  ElementCreatorType<ImageTypeType, S, ImageElementPropsType>;
 
 type VideoSourceType = {
   source: string,
   type: string,
 };
 type VideoElementPropsType = {
-  sources: Array<VideoSourceType>,
+  sources: $ReadOnlyArray<VideoSourceType>,
   loop?: true,
   autoplay?: true,
-  width: number,
-  height: number,
+  width: string | number,
+  height: string | number,
   layout: MediaLayoutType,
   poster?: string,
 };
-type VideoElementType = ElementCreatorType<VideoTypeType, VideoElementPropsType>;
+export type VideoElementType<S: ?StylesType> =
+  ElementCreatorType<VideoTypeType, S, VideoElementPropsType>;
 
-type TextElementType = ElementCreatorType<HeadingTypeType | ParagraphTypeType, { text: string, }>;
+export type MediaElementType = ImageElementType<*> | VideoElementType<*>;
 
-type ElementType =
-  ContainerType |
-  TextElementType |
-  ImageElementType |
-  VideoElementType;
+export type TextElementType<T: HeadingTypeType | ParagraphTypeType, S: ?StylesType>
+  = ElementCreatorType<T, S, { text: string, }>;
+export type HeadingElementType<S: ?StylesType> = TextElementType<HeadingTypeType, S>;
+export type ParagraphElementType<S: ?StylesType> = TextElementType<ParagraphTypeType, S>;
 
-type FillPageLayerType = {
+export type ElementType =
+  | ContainerElementType<*, *>
+  | TextElementType<*, *>
+  | ImageElementType<*>
+  | VideoElementType<*>;
+
+export type FillLayerType<E: ?ElementType, S: ?StylesType> = {|
   template: 'fill',
-  element?: ElementType,
-  styles?: StylesType,
-};
+  element?: E,
+  styles?: S,
+|};
 
-type ThirdsPageLayerType = {
+type ThirdsElementType = { thirdIndex: 0 | 1 | 2, } & ElementType;
+
+export type ThirdsLayerType<E: ?[
+  ThirdsElementType,
+  ThirdsElementType,
+  ThirdsElementType,
+], S: ?StylesType> = {|
   template: 'thirds',
-  elements?: [ ElementType, ElementType, ElementType, ],
-  styles?: StylesType,
-};
+  elements?: E,
+  styles?: S,
+|};
 
-type PageLayerType = FillPageLayerType | ThirdsPageLayerType | {
-  template: 'vertical' | 'horizontal',
-  elements?: Array<ElementType>,
-  styles?: StylesType,
-};
+export type VerticalLayerType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType> = {|
+  template: 'vertical',
+  elements?: E,
+  styles?: S,
+|};
 
-type PageType = {
+export type HorizontalLayerType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType> = {|
+  template: 'horizontal',
+  elements?: E,
+  styles?: S,
+|};
+
+export type LayerType =
+  | FillLayerType<*, *>
+  | VerticalLayerType<*, *>
+  | HorizontalLayerType<*, *>;
+
+export type PageType<L: ?$ReadOnlyArray<LayerType>> = {|
   id: string,
-  layers: Array<PageLayerType>,
-};
+  layers: L,
+|};
 
 export type StoryAnalyticsType = {
   type?: string,
@@ -220,7 +245,7 @@ export type StoryType = {
   meta?: string | StoryMetaType,
   customCss?: string,
   defaultStyles?: { [ElementTypeType]: StylesType, },
-  pages?: Array<PageType>,
+  pages?: $ReadOnlyArray<PageType<*>>,
   canonicalUrl?: string,
   analytics?: Array<StoryAnalyticsType>,
 };

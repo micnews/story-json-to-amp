@@ -63,8 +63,8 @@
     "immutable-object-methods": "^1.3.1",
     "js-beautify": "^1.6.14",
     "lodash.flow": "^3.5.0",
-    "postcss-js": "^1.0.1",
-    "to-css": "^1.2.1"
+    "postcss": "^6.0.13",
+    "postcss-js": "^1.0.1"
   },
   "miclint": {
     "ignore": [
