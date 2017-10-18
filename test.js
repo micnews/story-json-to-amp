@@ -864,7 +864,7 @@ test('works with meta passed as string', (t) => {
 });
 
 test('exports convertToReactInlineStyle function', (t) => {
-  const actual = convertToReactInlineStyle({
+  const actual1 = convertToReactInlineStyle({
     boxShadow: {
       offset: { width: 5, height: 5 },
       radius: 5,
@@ -903,7 +903,7 @@ test('exports convertToReactInlineStyle function', (t) => {
     paddingTop: 500,
   });
 
-  const expected = {
+  const expected1 = {
     WebkitBoxShadow: '5px 5px 5px #000000',
     boxShadow: '5px 5px 5px #000000',
     textShadow: '5px 5px 5px #000000',
@@ -919,6 +919,13 @@ test('exports convertToReactInlineStyle function', (t) => {
     gridGap: '0',
   };
 
-  t.deepEqual(actual, expected);
+  t.deepEqual(actual1, expected1);
+
+  const actual2 = convertToReactInlineStyle();
+
+  const expected2 = { gridGap: '0' };
+
+  t.deepEqual(actual2, expected2);
+
   t.end();
 });
