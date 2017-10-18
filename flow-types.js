@@ -148,8 +148,8 @@ type MediaLayoutType = 'fill' | 'fixed' | 'fixed-height' | 'flex-item' | 'nodisp
 type ImageElementPropsType = {
   alt?: string,
   source: string,
-  width: string | number,
-  height: string | number,
+  width: number,
+  height: number,
   layout: MediaLayoutType,
 };
 export type ImageElementType<S: ?StylesType> =
@@ -163,8 +163,8 @@ type VideoElementPropsType = {
   sources: $ReadOnlyArray<VideoSourceType>,
   loop?: true,
   autoplay?: true,
-  width: string | number,
-  height: string | number,
+  width: number,
+  height: number,
   layout: MediaLayoutType,
   poster?: string,
 };
