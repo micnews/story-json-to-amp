@@ -315,7 +315,7 @@ test('parsing', (t) => {
         padding: 5px;
         font-size: 28px;
         font-family: "MicSans", arial;
-        grid-gap: 0;
+        grid-gap: 0
       }
       p {
         color: #fff;
@@ -323,7 +323,7 @@ test('parsing', (t) => {
         padding: 5px;
         font-size: 16px;
         font-family: "Graphik", arial;
-        grid-gap: 0;
+        grid-gap: 0
       }
       .s-1 {
         -webkit-box-shadow: 5px 5px 5px #000000;
@@ -338,7 +338,7 @@ test('parsing', (t) => {
         font-size: 500px;
         padding-top: 500px;
         background: linear-gradient(50deg, red 30px, blue 50%, black);
-        grid-gap: 0;
+        grid-gap: 0
       }
       .s-2 {
         -webkit-box-pack: end;
@@ -350,7 +350,7 @@ test('parsing', (t) => {
         -ms-flex-line-pack: end;
         align-content: flex-end;
         justify-items: flex-end;
-        grid-gap: 0;
+        grid-gap: 0
       }
       .s-3 {
         -webkit-box-pack: start;
@@ -358,18 +358,18 @@ test('parsing', (t) => {
         justify-content: flex-start;
         -ms-flex-line-pack: start;
         align-content: flex-start;
-        grid-gap: 0;
+        grid-gap: 0
       }
       .s-4 {
         padding-top: 500px;
-        grid-gap: 0;
+        grid-gap: 0
       }
       .s-5 {
         -webkit-box-align: end;
         -ms-flex-align: end;
         align-items: flex-end;
         justify-items: flex-end;
-        grid-gap: 0;
+        grid-gap: 0
       }
     </style>
     <script type="application/ld+json">
