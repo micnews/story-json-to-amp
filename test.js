@@ -904,15 +904,19 @@ test('exports convertToReactInlineStyle function', (t) => {
   });
 
   const expected = {
+    WebkitBoxShadow: '5px 5px 5px #000000',
+    boxShadow: '5px 5px 5px #000000',
+    textShadow: '5px 5px 5px #000000',
+    WebkitTransform: 'rotate(90deg) translateX(50px)',
     transform: 'rotate(90deg) translateX(50px)',
+    WebkitFilter: 'blur(3px) grayscale(30%)',
     filter: 'blur(3px) grayscale(30%)',
+    WebkitBackdropFilter: 'blur(3px) grayscale(30%)',
     backdropFilter: 'blur(3px) grayscale(30%)',
     fontSize: '500px',
     paddingTop: '500px',
-    boxShadow: '5px 5px 5px #000000',
-    textShadow: '5px 5px 5px #000000',
     background: 'linear-gradient(50deg, red 30px, blue 50%, black)',
-    gridGap: 0,
+    gridGap: '0',
   };
 
   t.deepEqual(actual, expected);

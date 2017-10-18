@@ -64,7 +64,7 @@
     "js-beautify": "^1.6.14",
     "lodash.flow": "^3.5.0",
     "postcss": "^6.0.13",
-    "to-css": "^1.2.1"
+    "postcss-js": "^1.0.1"
   },
   "miclint": {
     "ignore": [
