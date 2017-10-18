@@ -58,6 +58,9 @@ export type StylesType = {
   bottom?: DistanceType,
   right?: DistanceType,
 
+  width?: DistanceType,
+  height?: DistanceType,
+
   margin?: DistanceType,
   marginTop?: DistanceType,
   marginBottom?: DistanceType,

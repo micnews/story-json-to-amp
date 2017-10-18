@@ -72,6 +72,8 @@ test('parsing', (t) => {
                 type: 'heading',
                 text: 'This is a heading',
                 styles: {
+                  width: 10,
+                  height: 10,
                   boxShadow: {
                     offset: { width: 5, height: 5 },
                     radius: 5,
@@ -326,6 +328,8 @@ test('parsing', (t) => {
         grid-gap: 0
       }
       .s-1 {
+        width: 10px;
+        height: 10px;
         -webkit-box-shadow: 5px 5px 5px #000000;
         box-shadow: 5px 5px 5px #000000;
         text-shadow: 5px 5px 5px #000000;
