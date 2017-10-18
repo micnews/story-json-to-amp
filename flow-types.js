@@ -201,6 +201,7 @@ export type HorizontalLayerType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType>
 
 export type LayerType =
   | FillLayerType<*, *>
+  | ThirdsLayerType<*, *>
   | VerticalLayerType<*, *>
   | HorizontalLayerType<*, *>;
 
