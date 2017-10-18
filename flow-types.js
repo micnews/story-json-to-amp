@@ -45,10 +45,19 @@ type LinearGradientType = {
   }>,
 };
 
-type ShadowType = {
-  offset: { width: NumberOfPixelsType, height: NumberOfPixelsType, },
+type RootShadowType = {
+  offset: { x: NumberOfPixelsType, y: NumberOfPixelsType, },
   color?: ColorType,
-  radius?: NumberOfPixelsType,
+  blurRadius?: NumberOfPixelsType,
+};
+type BoxShadowType = RootShadowType & {
+  spread?: NumberOfPixelsType,
+};
+
+type BorderType = {
+  width: NumberOfPixelsType,
+  color: ColorType,
+  style: 'solid' | 'dotted' | 'dashed',
 };
 
 export type StylesType = {
@@ -73,11 +82,17 @@ export type StylesType = {
   paddingRight?: DistanceType,
   paddingLeft?: DistanceType,
 
-  border?: DistanceType,
-  borderTop?: DistanceType,
-  borderBottom?: DistanceType,
-  borderRight?: DistanceType,
-  borderLeft?: DistanceType,
+  border?: BorderType,
+  borderTop?: BorderType,
+  borderBottom?: BorderType,
+  borderRight?: BorderType,
+  borderLeft?: BorderType,
+
+  borderRadius?: NumberOfPixelsType,
+  borderTopLeftRadius?: NumberOfPixelsType,
+  borderTopRightRadius?: NumberOfPixelsType,
+  borderBottomLeftRadius?: NumberOfPixelsType,
+  borderBottomRightRadius?: NumberOfPixelsType,
 
   display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'inline-flex',
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
@@ -87,14 +102,14 @@ export type StylesType = {
 
   backgroundColor?: ColorType,
   backgroundLinearGradient?: LinearGradientType,
-  boxShadow?: ShadowType | $ReadOnlyArray<ShadowType>,
+  boxShadow?: BoxShadowType | $ReadOnlyArray<BoxShadowType>,
 
   color?: ColorType,
   fontFamily?: string,
-  fontSize?: DistanceType,
+  fontSize?: NumberOfPixelsType,
   lineHeight?: number,
   fontStyle?: 'normal' | 'italic',
-  textShadow?: ShadowType | $ReadOnlyArray<ShadowType>,
+  textShadow?: RootShadowType | $ReadOnlyArray<RootShadowType>,
 
   opacity?: number,
   transform?: TransformsType,
@@ -136,8 +151,8 @@ type MediaLayoutType = 'fill' | 'fixed' | 'fixed-height' | 'flex-item' | 'nodisp
 type ImageElementPropsType = {
   alt?: string,
   source: string,
-  width: string | number,
-  height: string | number,
+  width: number,
+  height: number,
   layout: MediaLayoutType,
 };
 export type ImageElementType<S: ?StylesType> =
@@ -151,8 +166,8 @@ type VideoElementPropsType = {
   sources: $ReadOnlyArray<VideoSourceType>,
   loop?: true,
   autoplay?: true,
-  width: string | number,
-  height: string | number,
+  width: number,
+  height: number,
   layout: MediaLayoutType,
   poster?: string,
 };

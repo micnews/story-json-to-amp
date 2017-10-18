@@ -74,14 +74,21 @@ test('parsing', (t) => {
                 styles: {
                   width: 10,
                   height: 10,
+                  border: {
+                    width: 1,
+                    color: '#000000',
+                    style: 'dashed',
+                  },
+                  borderRadius: 10,
                   boxShadow: {
-                    offset: { width: 5, height: 5 },
-                    radius: 5,
+                    offset: { x: 5, y: 5 },
+                    blurRadius: 5,
+                    spread: 10,
                     color: '#000000',
                   },
                   textShadow: [{
-                    offset: { width: 5, height: 5 },
-                    radius: 5,
+                    offset: { x: 5, y: 5 },
+                    blurRadius: 5,
                     color: '#000000',
                   }],
                   transform: [
@@ -330,8 +337,10 @@ test('parsing', (t) => {
       .s-1 {
         width: 10px;
         height: 10px;
-        -webkit-box-shadow: 5px 5px 5px #000000;
-        box-shadow: 5px 5px 5px #000000;
+        border: 1px dashed #000000;
+        border-radius: 10px;
+        -webkit-box-shadow: 5px 5px 5px 10px #000000;
+        box-shadow: 5px 5px 5px 10px #000000;
         text-shadow: 5px 5px 5px #000000;
         -webkit-transform: rotate(90deg) translateX(50%) translateY(50px) scale(2);
         transform: rotate(90deg) translateX(50%) translateY(50px) scale(2);
@@ -870,13 +879,14 @@ test('works with meta passed as string', (t) => {
 test('exports convertToReactInlineStyle function', (t) => {
   const actual1 = convertToReactInlineStyle({
     boxShadow: {
-      offset: { width: 5, height: 5 },
-      radius: 5,
+      offset: { x: 5, y: 5 },
+      blurRadius: 5,
+      spread: 10,
       color: '#000000',
     },
     textShadow: [{
-      offset: { width: 5, height: 5 },
-      radius: 5,
+      offset: { x: 5, y: 5 },
+      blurRadius: 5,
       color: '#000000',
     }],
     transform: [
@@ -908,8 +918,8 @@ test('exports convertToReactInlineStyle function', (t) => {
   });
 
   const expected1 = {
-    WebkitBoxShadow: '5px 5px 5px #000000',
-    boxShadow: '5px 5px 5px #000000',
+    WebkitBoxShadow: '5px 5px 5px 10px #000000',
+    boxShadow: '5px 5px 5px 10px #000000',
     textShadow: '5px 5px 5px #000000',
     WebkitTransform: 'rotate(90deg) translateX(50px)',
     transform: 'rotate(90deg) translateX(50px)',
