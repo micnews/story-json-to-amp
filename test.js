@@ -74,6 +74,12 @@ test('parsing', (t) => {
                 styles: {
                   width: 10,
                   height: 10,
+                  border: {
+                    width: 1,
+                    color: '#000000',
+                    style: 'dashed',
+                  },
+                  borderRadius: 10,
                   boxShadow: {
                     offset: { width: 5, height: 5 },
                     radius: 5,
@@ -330,6 +336,8 @@ test('parsing', (t) => {
       .s-1 {
         width: 10px;
         height: 10px;
+        border: 1px dashed #000000;
+        border-radius: 10px;
         -webkit-box-shadow: 5px 5px 5px #000000;
         box-shadow: 5px 5px 5px #000000;
         text-shadow: 5px 5px 5px #000000;

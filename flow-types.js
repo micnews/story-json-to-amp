@@ -51,6 +51,12 @@ type ShadowType = {
   radius?: NumberOfPixelsType,
 };
 
+type BorderType = {
+  width: NumberOfPixelsType,
+  color: ColorType,
+  style: 'solid' | 'dotted' | 'dashed',
+};
+
 export type StylesType = {
   position?: 'relative' | 'absolute',
   top?: DistanceType,
@@ -73,11 +79,17 @@ export type StylesType = {
   paddingRight?: DistanceType,
   paddingLeft?: DistanceType,
 
-  border?: DistanceType,
-  borderTop?: DistanceType,
-  borderBottom?: DistanceType,
-  borderRight?: DistanceType,
-  borderLeft?: DistanceType,
+  border?: BorderType,
+  borderTop?: BorderType,
+  borderBottom?: BorderType,
+  borderRight?: BorderType,
+  borderLeft?: BorderType,
+
+  borderRadius?: NumberOfPixelsType,
+  borderTopLeftRadius?: NumberOfPixelsType,
+  borderTopRightRadius?: NumberOfPixelsType,
+  borderBottomLeftRadius?: NumberOfPixelsType,
+  borderBottomRightRadius?: NumberOfPixelsType,
 
   display?: 'block' | 'inline' | 'inline-block' | 'flex' | 'inline-flex',
   flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
@@ -91,7 +103,7 @@ export type StylesType = {
 
   color?: ColorType,
   fontFamily?: string,
-  fontSize?: DistanceType,
+  fontSize?: NumberOfPixelsType,
   lineHeight?: number,
   fontStyle?: 'normal' | 'italic',
   textShadow?: ShadowType | $ReadOnlyArray<ShadowType>,
