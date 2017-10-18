@@ -247,8 +247,8 @@ test('parsing', (t) => {
 <html ⚡ lang="en">
   <head>
     <meta charset="utf-8">
-    <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
-    <script async custom-element="amp-story" src="https://stamp-prototype.appspot.com/v0/amp-story-0.1.js"></script>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-0.1.js"></script>
     <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
     <title>A test story</title>
     <link rel="canonical" href="https://mic.com/stories/1" />
@@ -473,8 +473,8 @@ test('parsing', (t) => {
 <html ⚡ lang="en">
   <head>
     <meta charset="utf-8">
-    <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
-    <script async custom-element="amp-story" src="https://stamp-prototype.appspot.com/v0/amp-story-0.1.js"></script>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-0.1.js"></script>
     <title>A test story</title>
     <link rel="canonical" href="https://mic.com/stories/1" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
@@ -591,8 +591,8 @@ test('analytics', (t) => {
 <html ⚡ lang="en">
   <head>
     <meta charset="utf-8">
-    <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
-    <script async custom-element="amp-story" src="https://stamp-prototype.appspot.com/v0/amp-story-0.1.js"></script>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <title>A test story</title>
     <link rel="canonical" href="https://mic.com/stories/1" />
@@ -713,8 +713,8 @@ test('works with no options passed', (t) => {
 <html ⚡ lang="en">
   <head>
     <meta charset="utf-8">
-    <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
-    <script async custom-element="amp-story" src="https://stamp-prototype.appspot.com/v0/amp-story-0.1.js"></script>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-0.1.js"></script>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <style amp-boilerplate>
       body {
@@ -802,8 +802,8 @@ test('works with meta passed as string', (t) => {
 <html ⚡ lang="en">
   <head>
     <meta charset="utf-8">
-    <script async src="https://stamp-prototype.appspot.com/v0.js"></script>
-    <script async custom-element="amp-story" src="https://stamp-prototype.appspot.com/v0/amp-story-0.1.js"></script>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-0.1.js"></script>
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <style amp-boilerplate>
       body {
