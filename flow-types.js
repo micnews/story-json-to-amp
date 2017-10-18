@@ -45,10 +45,13 @@ type LinearGradientType = {
   }>,
 };
 
-type ShadowType = {
-  offset: { width: NumberOfPixelsType, height: NumberOfPixelsType, },
+type RootShadowType = {
+  offset: { x: NumberOfPixelsType, y: NumberOfPixelsType, },
   color?: ColorType,
-  radius?: NumberOfPixelsType,
+  blurRadius?: NumberOfPixelsType,
+};
+type BoxShadowType = RootShadowType & {
+  spread?: NumberOfPixelsType,
 };
 
 type BorderType = {
@@ -99,14 +102,14 @@ export type StylesType = {
 
   backgroundColor?: ColorType,
   backgroundLinearGradient?: LinearGradientType,
-  boxShadow?: ShadowType | $ReadOnlyArray<ShadowType>,
+  boxShadow?: BoxShadowType | $ReadOnlyArray<BoxShadowType>,
 
   color?: ColorType,
   fontFamily?: string,
   fontSize?: NumberOfPixelsType,
   lineHeight?: number,
   fontStyle?: 'normal' | 'italic',
-  textShadow?: ShadowType | $ReadOnlyArray<ShadowType>,
+  textShadow?: RootShadowType | $ReadOnlyArray<RootShadowType>,
 
   opacity?: number,
   transform?: TransformsType,
