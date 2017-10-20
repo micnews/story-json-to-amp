@@ -45,6 +45,7 @@ test('parsing', (t) => {
         layers: [
           {
             template: 'fill',
+            id: 'test-id',
             element: {
               type: 'video',
               sources: [
@@ -420,7 +421,7 @@ test('parsing', (t) => {
   <body>
     <amp-story standalone>
       <amp-story-page id="page-0">
-        <amp-story-grid-layer template="fill">
+        <amp-story-grid-layer template="fill" id="test-id">
           <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.m3u8">
             <source type="application/x-mpegURL" src="test.com/video.m3u8">
           </amp-video>
