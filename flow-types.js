@@ -117,6 +117,8 @@ export type StylesType = {
   backdropFilter?: FiltersType,
 };
 
+type AnnotationType = any;
+
 type ContainerTypeType = 'container';
 type ImageTypeType = 'image';
 type VideoTypeType = 'video';
@@ -138,6 +140,7 @@ export type ElementStylesType = { [ElementTypeType]: StylesType, };
 
 type ElementCreatorType<T: ElementTypeType, S: ?StylesType, Props: Object> = Props & {
   type: T,
+  annotation?: AnnotationType,
   styles?: S,
 };
 
@@ -189,7 +192,7 @@ export type ElementType =
 
 export type FillLayerType<E: ?ElementType, S: ?StylesType> = {|
   template: 'fill',
-  id?: string,
+  annotation?: AnnotationType,
   element?: E,
   styles?: S,
 |};
@@ -202,21 +205,21 @@ export type ThirdsLayerType<E: ?[
   ThirdsElementType,
 ], S: ?StylesType> = {|
   template: 'thirds',
-  id?: string,
+  annotation?: AnnotationType,
   elements?: E,
   styles?: S,
 |};
 
 export type VerticalLayerType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType> = {|
   template: 'vertical',
-  id?: string,
+  annotation?: AnnotationType,
   elements?: E,
   styles?: S,
 |};
 
 export type HorizontalLayerType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType> = {|
   template: 'horizontal',
-  id?: string,
+  annotation?: AnnotationType,
   elements?: E,
   styles?: S,
 |};

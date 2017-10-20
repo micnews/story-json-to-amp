@@ -45,9 +45,10 @@ test('parsing', (t) => {
         layers: [
           {
             template: 'fill',
-            id: 'test-id',
+            annotation: 'annotation that should be stripped',
             element: {
               type: 'video',
+              annotation: 'annotation that should be stripped',
               sources: [
                 {
                   source: 'test.com/video.m3u8',
@@ -421,7 +422,7 @@ test('parsing', (t) => {
   <body>
     <amp-story standalone>
       <amp-story-page id="page-0">
-        <amp-story-grid-layer template="fill" id="test-id">
+        <amp-story-grid-layer template="fill">
           <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.m3u8">
             <source type="application/x-mpegURL" src="test.com/video.m3u8">
           </amp-video>
