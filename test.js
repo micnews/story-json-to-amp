@@ -42,11 +42,14 @@ test('parsing', (t) => {
     pages: [
       {
         id: 'page-0',
+        annotation: 'annotation that should be stripped',
         layers: [
           {
             template: 'fill',
+            annotation: 'annotation that should be stripped',
             element: {
               type: 'video',
+              annotation: 'annotation that should be stripped',
               sources: [
                 {
                   source: 'test.com/video.m3u8',
