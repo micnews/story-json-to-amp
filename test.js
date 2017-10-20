@@ -42,6 +42,7 @@ test('parsing', (t) => {
     pages: [
       {
         id: 'page-0',
+        annotation: 'annotation that should be stripped',
         layers: [
           {
             template: 'fill',

@@ -232,6 +232,7 @@ export type LayerType =
 
 export type PageType<L: ?$ReadOnlyArray<LayerType>> = {|
   id: string,
+  annotation?: AnnotationType,
   layers: L,
 |};
 
