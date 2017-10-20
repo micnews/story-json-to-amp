@@ -189,6 +189,7 @@ export type ElementType =
 
 export type FillLayerType<E: ?ElementType, S: ?StylesType> = {|
   template: 'fill',
+  id?: string,
   element?: E,
   styles?: S,
 |};
@@ -201,18 +202,21 @@ export type ThirdsLayerType<E: ?[
   ThirdsElementType,
 ], S: ?StylesType> = {|
   template: 'thirds',
+  id?: string,
   elements?: E,
   styles?: S,
 |};
 
 export type VerticalLayerType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType> = {|
   template: 'vertical',
+  id?: string,
   elements?: E,
   styles?: S,
 |};
 
 export type HorizontalLayerType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType> = {|
   template: 'horizontal',
+  id?: string,
   elements?: E,
   styles?: S,
 |};
