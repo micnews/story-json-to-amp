@@ -138,14 +138,18 @@ export type ElementTypeType =
 
 export type ElementStylesType = { [ElementTypeType]: StylesType, };
 
-type ElementCreatorType<T: ElementTypeType, S: ?StylesType, Props: Object> = Props & {
+type ElementCreatorType<T: ElementTypeType, S: ?StylesType, A: ?AnnotationType, P: Object> = P & {
   type: T,
-  annotation?: AnnotationType,
+  annotation?: A,
   styles?: S,
 };
 
-export type ContainerElementType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType>
-  = ElementCreatorType<ContainerTypeType, S, {
+export type ContainerElementType<
+  E: ?$ReadOnlyArray<ElementType>,
+  S: ?StylesType,
+  A: ?AnnotationType,
+>
+  = ElementCreatorType<ContainerTypeType, S, A, {
   elements?: E,
 }>;
 
@@ -158,8 +162,8 @@ type ImageElementPropsType = {
   height: number,
   layout: MediaLayoutType,
 };
-export type ImageElementType<S: ?StylesType> =
-  ElementCreatorType<ImageTypeType, S, ImageElementPropsType>;
+export type ImageElementType<S: ?StylesType, A: ?AnnotationType> =
+  ElementCreatorType<ImageTypeType, S, A, ImageElementPropsType>;
 
 type VideoSourceType = {
   source: string,
@@ -174,65 +178,87 @@ type VideoElementPropsType = {
   layout: MediaLayoutType,
   poster?: string,
 };
-export type VideoElementType<S: ?StylesType> =
-  ElementCreatorType<VideoTypeType, S, VideoElementPropsType>;
+export type VideoElementType<S: ?StylesType, A: ?AnnotationType> =
+  ElementCreatorType<VideoTypeType, S, A, VideoElementPropsType>;
 
 export type MediaElementType = ImageElementType<*> | VideoElementType<*>;
 
-export type TextElementType<T: HeadingTypeType | ParagraphTypeType, S: ?StylesType>
-  = ElementCreatorType<T, S, { text: string, }>;
-export type HeadingElementType<S: ?StylesType> = TextElementType<HeadingTypeType, S>;
-export type ParagraphElementType<S: ?StylesType> = TextElementType<ParagraphTypeType, S>;
+export type TextElementType<
+  T: HeadingTypeType | ParagraphTypeType,
+  S: ?StylesType,
+  A: ?AnnotationType,
+>
+  = ElementCreatorType<T, S, A, { text: string, }>;
+export type HeadingElementType<
+  S: ?StylesType,
+  A: ?AnnotationType,
+> = TextElementType<HeadingTypeType, S, A>;
+export type ParagraphElementType<
+  S: ?StylesType,
+  A: ?AnnotationType,
+> = TextElementType<ParagraphTypeType, S, A>;
 
 export type ElementType =
-  | ContainerElementType<*, *>
-  | TextElementType<*, *>
-  | ImageElementType<*>
-  | VideoElementType<*>;
+  | ContainerElementType<*, *, *>
+  | TextElementType<*, *, *>
+  | ImageElementType<*, *>
+  | VideoElementType<*, *>;
 
-export type FillLayerType<E: ?ElementType, S: ?StylesType> = {|
+export type FillLayerType<
+  E: ?ElementType,
+  S: ?StylesType,
+  A: ?AnnotationType,
+> = {|
   template: 'fill',
-  annotation?: AnnotationType,
+  annotation?: A,
   element?: E,
   styles?: S,
 |};
 
 type ThirdsElementType = { thirdIndex: 0 | 1 | 2, } & ElementType;
 
-export type ThirdsLayerType<E: ?[
-  ThirdsElementType,
-  ThirdsElementType,
-  ThirdsElementType,
-], S: ?StylesType> = {|
+export type ThirdsLayerType<
+  E: ?[ ThirdsElementType, ThirdsElementType, ThirdsElementType, ],
+  S: ?StylesType,
+  A: ?AnnotationType,
+> = {|
   template: 'thirds',
-  annotation?: AnnotationType,
+  annotation?: A,
   elements?: E,
   styles?: S,
 |};
 
-export type VerticalLayerType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType> = {|
+export type VerticalLayerType<
+  E: ?$ReadOnlyArray<ElementType>,
+  S: ?StylesType,
+  A: ?AnnotationType,
+> = {|
   template: 'vertical',
-  annotation?: AnnotationType,
+  annotation?: A,
   elements?: E,
   styles?: S,
 |};
 
-export type HorizontalLayerType<E: ?$ReadOnlyArray<ElementType>, S: ?StylesType> = {|
+export type HorizontalLayerType<
+  E: ?$ReadOnlyArray<ElementType>,
+  S: ?StylesType,
+  A: ?AnnotationType,
+> = {|
   template: 'horizontal',
-  annotation?: AnnotationType,
+  annotation?: A,
   elements?: E,
   styles?: S,
 |};
 
 export type LayerType =
-  | FillLayerType<*, *>
-  | ThirdsLayerType<*, *>
-  | VerticalLayerType<*, *>
-  | HorizontalLayerType<*, *>;
+  | FillLayerType<*, *, *>
+  | ThirdsLayerType<*, *, *>
+  | VerticalLayerType<*, *, *>
+  | HorizontalLayerType<*, *, *>;
 
-export type PageType<L: ?$ReadOnlyArray<LayerType>> = {|
+export type PageType<L: $ReadOnlyArray<LayerType>, A: ?AnnotationType> = {|
   id: string,
-  annotation?: AnnotationType,
+  annotation?: A,
   layers: L,
 |};
 
@@ -272,7 +298,7 @@ export type StoryType = {
   meta?: string | StoryMetaType,
   customCss?: string,
   defaultStyles?: { [ElementTypeType]: StylesType, },
-  pages?: $ReadOnlyArray<PageType<*>>,
+  pages?: $ReadOnlyArray<PageType<*, *>>,
   canonicalUrl?: string,
   analytics?: Array<StoryAnalyticsType>,
 };
