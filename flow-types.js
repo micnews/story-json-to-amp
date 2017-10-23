@@ -181,7 +181,7 @@ type VideoElementPropsType = {
 export type VideoElementType<S: ?StylesType, A: ?AnnotationType> =
   ElementCreatorType<VideoTypeType, S, A, VideoElementPropsType>;
 
-export type MediaElementType = ImageElementType<*> | VideoElementType<*>;
+export type MediaElementType<S, A> = ImageElementType<S, A> | VideoElementType<S, A>;
 
 export type TextElementType<
   T: HeadingTypeType | ParagraphTypeType,
