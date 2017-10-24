@@ -921,14 +921,10 @@ test('exports convertToReactInlineStyle function', (t) => {
   });
 
   const expected1 = {
-    WebkitBoxShadow: '5px 5px 5px 10px #000000',
     boxShadow: '5px 5px 5px 10px #000000',
     textShadow: '5px 5px 5px #000000',
-    WebkitTransform: 'rotate(90deg) translateX(50px)',
     transform: 'rotate(90deg) translateX(50px)',
-    WebkitFilter: 'blur(3px) grayscale(30%)',
     filter: 'blur(3px) grayscale(30%)',
-    WebkitBackdropFilter: 'blur(3px) grayscale(30%)',
     backdropFilter: 'blur(3px) grayscale(30%)',
     fontSize: '500px',
     paddingTop: '500px',
