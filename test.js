@@ -424,7 +424,7 @@ test('parsing', (t) => {
     <amp-story standalone>
       <amp-story-page id="page-0">
         <amp-story-grid-layer template="fill">
-          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.m3u8">
+          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600">
             <source type="application/x-mpegURL" src="test.com/video.m3u8">
           </amp-video>
         </amp-story-grid-layer>
@@ -446,7 +446,7 @@ test('parsing', (t) => {
       <amp-story-page id="page-2">
         <amp-story-grid-layer template="thirds">
           <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" grid-area="upper-third" class="s-4"></amp-img>
-          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" src="test.com/video.mp4" grid-area="middle-third" class="s-4">
+          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" grid-area="middle-third" class="s-4">
             <source type="video/mp4" src="test.com/video.mp4">
           </amp-video>
           <div grid-area="lower-third" class="s-4">
