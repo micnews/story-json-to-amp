@@ -673,35 +673,36 @@ test('analytics', (t) => {
     </script>
   </head>
   <body>
-    <amp-analytics>
-      <script type="application/json">
-        {
-          "requests": {
-            "pageview": "https://foo.com/pixel?RANDOM"
-          },
-          "triggers": {
-            "trackPageview": {
-              "on": "visible",
-              "request": "pageview"
+    <amp-story standalone>
+      <amp-analytics>
+        <script type="application/json">
+          {
+            "requests": {
+              "pageview": "https://foo.com/pixel?RANDOM"
+            },
+            "triggers": {
+              "trackPageview": {
+                "on": "visible",
+                "request": "pageview"
+              }
             }
           }
-        }
-      </script>
-    </amp-analytics>
-    <amp-analytics type="nielsen">
-      <script type="application/json">
-        {
-          "vars": {
-            "apid": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-            "apv": "1.0",
-            "apn": "Story",
-            "section": "news",
-            "segA": "Music"
+        </script>
+      </amp-analytics>
+      <amp-analytics type="nielsen">
+        <script type="application/json">
+          {
+            "vars": {
+              "apid": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+              "apv": "1.0",
+              "apn": "Story",
+              "section": "news",
+              "segA": "Music"
+            }
           }
-        }
-      </script>
-    </amp-analytics>
-    <amp-story standalone></amp-story>
+        </script>
+      </amp-analytics>
+    </amp-story>
   </body>
 </html>`;
 
