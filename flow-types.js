@@ -192,10 +192,8 @@ export type InlineTextStyleType = {
 export type TextElementType<
   T: HeadingTypeType | ParagraphTypeType,
   S: ?StylesType,
-  IS: ?Array<InlineTextStyleType>,
   A: ?AnnotationType,
->
-  = ElementCreatorType<T, S, A, { text: string, inlineStyles?: IS, }>;
+> = ElementCreatorType<T, S, A, { text: string, inlineStyles?: Array<InlineTextStyleType>, }>;
 export type HeadingElementType<
   S: ?StylesType,
   A: ?AnnotationType,
