@@ -183,12 +183,19 @@ export type VideoElementType<S: ?StylesType, A: ?AnnotationType> =
 
 export type MediaElementType<S, A> = ImageElementType<S, A> | VideoElementType<S, A>;
 
+export type InlineTextStyleType = {
+  start: number,
+  length: number,
+  styles: StylesType,
+};
+
 export type TextElementType<
   T: HeadingTypeType | ParagraphTypeType,
   S: ?StylesType,
+  IS: ?Array<InlineTextStyleType>,
   A: ?AnnotationType,
 >
-  = ElementCreatorType<T, S, A, { text: string, }>;
+  = ElementCreatorType<T, S, A, { text: string, inlineStyles?: IS, }>;
 export type HeadingElementType<
   S: ?StylesType,
   A: ?AnnotationType,

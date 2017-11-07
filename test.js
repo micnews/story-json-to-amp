@@ -126,7 +126,20 @@ test('parsing', (t) => {
               },
               {
                 type: 'heading1',
-                text: 'This is a heading1',
+                text: '0123456789',
+                inlineStyles: [{
+                  start: 2,
+                  length: 5,
+                  styles: {
+                    color: 'red',
+                  },
+                }, {
+                  start: 4,
+                  length: 5,
+                  styles: {
+                    fontStyle: 'italic',
+                  },
+                }],
               },
               {
                 type: 'heading2',
@@ -300,6 +313,14 @@ test('parsing', (t) => {
         grid-gap: 0
       }
       .s-2 {
+        color: red;
+        grid-gap: 0
+      }
+      .s-3 {
+        font-style: italic;
+        grid-gap: 0
+      }
+      .s-4 {
         -webkit-box-pack: end;
         -ms-flex-pack: end;
         justify-content: flex-end;
@@ -311,7 +332,7 @@ test('parsing', (t) => {
         justify-items: flex-end;
         grid-gap: 0
       }
-      .s-3 {
+      .s-5 {
         -webkit-box-pack: start;
         -ms-flex-pack: start;
         justify-content: flex-start;
@@ -319,11 +340,11 @@ test('parsing', (t) => {
         align-content: flex-start;
         grid-gap: 0
       }
-      .s-4 {
+      .s-6 {
         padding-top: 500px;
         grid-gap: 0
       }
-      .s-5 {
+      .s-7 {
         -webkit-box-align: end;
         -ms-flex-align: end;
         align-items: flex-end;
@@ -371,9 +392,9 @@ test('parsing', (t) => {
             <source type="application/x-mpegURL" src="test.com/video.m3u8">
           </amp-video>
         </amp-story-grid-layer>
-        <amp-story-grid-layer template="vertical" class="s-2">
+        <amp-story-grid-layer template="vertical" class="s-4">
           <h1 class="s-1">This is a heading</h1>
-          <h1>This is a heading1</h1>
+          <h1>01<span class="s-2">23</span><span class="s-2 s-3">456</span><span class="s-3">78</span>9</h1>
           <h2>This is a heading2</h2>
           <h3>This is a heading3</h3>
           <h4>This is a heading4</h4>
@@ -382,23 +403,23 @@ test('parsing', (t) => {
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-1">
-        <amp-story-grid-layer template="horizontal" class="s-3">
+        <amp-story-grid-layer template="horizontal" class="s-5">
           <p>This is a paragraph<br>with two<br>newlines<br>in it</p>
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-2">
         <amp-story-grid-layer template="thirds">
-          <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" grid-area="upper-third" class="s-4"></amp-img>
-          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" grid-area="middle-third" class="s-4">
+          <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" grid-area="upper-third" class="s-6"></amp-img>
+          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" grid-area="middle-third" class="s-6">
             <source type="video/mp4" src="test.com/video.mp4">
           </amp-video>
-          <div grid-area="lower-third" class="s-4">
+          <div grid-area="lower-third" class="s-6">
             <h1>This is a heading inside a container</h1>
           </div>
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-3">
-        <amp-story-grid-layer template="vertical" class="s-5">
+        <amp-story-grid-layer template="vertical" class="s-7">
           <div></div>
         </amp-story-grid-layer>
         <amp-story-grid-layer template="fill"></amp-story-grid-layer>
