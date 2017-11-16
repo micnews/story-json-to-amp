@@ -41,8 +41,8 @@ test('parsing', (t) => {
     },
     pages: [
       {
-        id: 'page-0',
         annotation: 'annotation that should be stripped',
+        autoAdvanceAfter: 5,
         layers: [
           {
             template: 'fill',
@@ -167,6 +167,7 @@ test('parsing', (t) => {
       },
       {
         id: 'page-1',
+        autoAdvanceAfter: 'this-is-a-video-id',
         layers: [
           {
             template: 'horizontal',
@@ -386,7 +387,7 @@ test('parsing', (t) => {
   </head>
   <body>
     <amp-story standalone>
-      <amp-story-page id="page-0">
+      <amp-story-page id="page-0" auto-advance-after="5s">
         <amp-story-grid-layer template="fill">
           <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600">
             <source type="application/x-mpegURL" src="test.com/video.m3u8">
@@ -402,7 +403,7 @@ test('parsing', (t) => {
           <h6>This is a heading6</h6>
         </amp-story-grid-layer>
       </amp-story-page>
-      <amp-story-page id="page-1">
+      <amp-story-page id="page-1" auto-advance-after="this-is-a-video-id">
         <amp-story-grid-layer template="horizontal" class="s-5">
           <p>This is a paragraph<br>with two<br>newlines<br>in it</p>
         </amp-story-grid-layer>

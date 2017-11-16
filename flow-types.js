@@ -140,6 +140,7 @@ export type ElementStylesType = { [ElementTypeType]: StylesType, };
 
 type ElementCreatorType<T: ElementTypeType, S: ?StylesType, A: ?AnnotationType, P: Object> = P & {
   type: T,
+  id?: string,
   annotation?: A,
   styles?: S,
 };
@@ -262,8 +263,9 @@ export type LayerType =
   | HorizontalLayerType<*, *, *>;
 
 export type PageType<L: $ReadOnlyArray<LayerType>, A: ?AnnotationType> = {|
-  id: string,
+  id?: string,
   annotation?: A,
+  autoAdvanceAfter?: string | number,
   layers: L,
 |};
 
