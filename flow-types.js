@@ -308,4 +308,5 @@ export type StoryType = {
   pages?: $ReadOnlyArray<PageType<*, *>>,
   canonicalUrl?: string,
   analytics?: Array<StoryAnalyticsType>,
+  bookendConfigSrc?: string,
 };
