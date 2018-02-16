@@ -14,7 +14,7 @@ const ampHtml = storyJsonToAmp(JSON.parse(json));
 
 ## API
 
-A few special optional properties can be added to the document, in addition to standard `story-json` properties:
+A few special optional properties can be added to the document, in addition to [standard `story-json` properties](https://github.com/micnews/story-json#document-properties):
 
 | Name | Description |
 | ------ | ------------- |
