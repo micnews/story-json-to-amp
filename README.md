@@ -7,9 +7,10 @@ Not all features of `story-json` format are supported at the moment, open an iss
 ## Usage
 
 ```js
+import story from './story.json';
 import storyJsonToAmp from 'story-json-to-amp';
 
-const ampHtml = storyJsonToAmp(JSON.parse(json));
+const ampHtml = storyJsonToAmp(story);
 ```
 
 ## API
