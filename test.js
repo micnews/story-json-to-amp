@@ -2,6 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import test from 'tape';
+import fs from 'fs';
 import storyJsonToStamp, { convertToReactInlineStyle } from './lib';
 
 test('parsing', (t) => {
@@ -765,6 +766,49 @@ test('bookendConfigSrc', (t) => {
   </body>
 </html>`;
 
+  t.equal(actual, expected);
+  t.end();
+});
+
+test('Hello World', (t) => {
+  const actual = storyJsonToStamp({
+    title: 'Hello World',
+    pages: [
+      {
+        layers: [
+          {
+            type: 'container',
+            styles: {
+              flex: 1,
+              backgroundColor: '#87d687',
+            },
+          },
+          {
+            type: 'container',
+            styles: {
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flex: 1,
+            },
+            elements: [
+              {
+                type: 'heading',
+                text: 'Hello World',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    defaultStyles: {
+      heading: {
+        fontFamily: 'sans-serif',
+      },
+    },
+  });
+
+  const expected = fs.readFileSync('hello-world.amp.html', 'utf8').trimRight();
   t.equal(actual, expected);
   t.end();
 });
