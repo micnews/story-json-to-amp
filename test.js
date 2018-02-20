@@ -772,6 +772,7 @@ test('bookendConfigSrc', (t) => {
 
 test('Hello World', (t) => {
   const actual = storyJsonToStamp({
+    version: 1,
     title: 'Hello World',
     pages: [
       {
