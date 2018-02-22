@@ -2,6 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import test from 'tape';
+import fs from 'fs';
 import storyJsonToStamp, { convertToReactInlineStyle } from './lib';
 
 test('parsing', (t) => {
@@ -45,27 +46,23 @@ test('parsing', (t) => {
         autoAdvanceAfter: 5,
         layers: [
           {
-            template: 'fill',
+            type: 'video',
             annotation: 'annotation that should be stripped',
-            element: {
-              type: 'video',
-              annotation: 'annotation that should be stripped',
-              sources: [
-                {
-                  source: 'test.com/video.m3u8',
-                  type: 'application/x-mpegURL',
-                },
-              ],
-              width: 900,
-              height: 1600,
-              layout: 'responsive',
-              poster: 'test.com/poster.jpg',
-              loop: true,
-              autoplay: true,
-            },
+            sources: [
+              {
+                source: 'test.com/video.m3u8',
+                type: 'application/x-mpegURL',
+              },
+            ],
+            width: 900,
+            height: 1600,
+            layout: 'responsive',
+            poster: 'test.com/poster.jpg',
+            loop: true,
+            autoplay: true,
           },
           {
-            template: 'vertical',
+            type: 'container',
             styles: {
               justifyContent: 'flex-end',
               alignItems: 'flex-end',
@@ -170,7 +167,7 @@ test('parsing', (t) => {
         autoAdvanceAfter: 'this-is-a-video-id',
         layers: [
           {
-            template: 'horizontal',
+            type: 'container',
             styles: {
               justifyContent: 'flex-start',
             },
@@ -187,7 +184,7 @@ test('parsing', (t) => {
         id: 'page-2',
         layers: [
           {
-            template: 'thirds',
+            type: 'container',
             elements: [
               {
                 type: 'image',
@@ -236,16 +233,13 @@ test('parsing', (t) => {
         id: 'page-3',
         layers: [
           {
-            template: 'vertical',
+            type: 'container',
             styles: {
               alignItems: 'flex-end',
             },
             elements: [{
               type: 'container',
             }],
-          },
-          {
-            template: 'fill',
           },
         ],
       },
@@ -295,6 +289,32 @@ test('parsing', (t) => {
         grid-gap: 0
       }
       .s-1 {
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        grid-gap: 0
+      }
+      .s-2 {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        grid-gap: 0
+      }
+      .s-3 {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        grid-gap: 0
+      }
+      .s-4 {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
         width: 10px;
         height: 10px;
         border: 1px dashed #000000;
@@ -313,15 +333,21 @@ test('parsing', (t) => {
         background: linear-gradient(50deg, red 30px, blue 50%, black);
         grid-gap: 0
       }
-      .s-2 {
+      .s-5 {
         color: red;
         grid-gap: 0
       }
-      .s-3 {
+      .s-6 {
         font-style: italic;
         grid-gap: 0
       }
-      .s-4 {
+      .s-7 {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
         -webkit-box-pack: end;
         -ms-flex-pack: end;
         justify-content: flex-end;
@@ -333,7 +359,13 @@ test('parsing', (t) => {
         justify-items: flex-end;
         grid-gap: 0
       }
-      .s-5 {
+      .s-8 {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
         -webkit-box-pack: start;
         -ms-flex-pack: start;
         justify-content: flex-start;
@@ -341,11 +373,33 @@ test('parsing', (t) => {
         align-content: flex-start;
         grid-gap: 0
       }
-      .s-6 {
+      .s-9 {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
         padding-top: 500px;
         grid-gap: 0
       }
-      .s-7 {
+      .s-10 {
+        padding-top: 500px;
+        grid-gap: 0
+      }
+      .s-11 {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        grid-gap: 0
+      }
+      .s-12 {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
         -webkit-box-align: end;
         -ms-flex-align: end;
         align-items: flex-end;
@@ -389,41 +443,68 @@ test('parsing', (t) => {
     <amp-story standalone>
       <amp-story-page id="page-0" auto-advance-after="5s">
         <amp-story-grid-layer template="fill">
-          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600">
-            <source type="application/x-mpegURL" src="test.com/video.m3u8">
-          </amp-video>
+          <div class="s-3">
+            <div class="s-2">
+              <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" class="s-1">
+                <source type="application/x-mpegURL" src="test.com/video.m3u8">
+              </amp-video>
+            </div>
+          </div>
         </amp-story-grid-layer>
-        <amp-story-grid-layer template="vertical" class="s-4">
-          <h1 class="s-1">This is a heading</h1>
-          <h1>01<span class="s-2">23</span><span class="s-2 s-3">456</span><span class="s-3">78</span>9</h1>
-          <h2>This is a heading2</h2>
-          <h3>This is a heading3</h3>
-          <h4>This is a heading4</h4>
-          <h5>This is a heading5</h5>
-          <h6>This is a heading6</h6>
+        <amp-story-grid-layer template="fill">
+          <div class="s-3">
+            <div class="s-2">
+              <div class="s-7">
+                <h1 class="s-4">This is a heading</h1>
+                <h1 class="s-3">01<span class="s-5">23</span><span class="s-5 s-6">456</span><span class="s-6">78</span>9</h1>
+                <h2 class="s-3">This is a heading2</h2>
+                <h3 class="s-3">This is a heading3</h3>
+                <h4 class="s-3">This is a heading4</h4>
+                <h5 class="s-3">This is a heading5</h5>
+                <h6 class="s-3">This is a heading6</h6>
+              </div>
+            </div>
+          </div>
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-1" auto-advance-after="this-is-a-video-id">
-        <amp-story-grid-layer template="horizontal" class="s-5">
-          <p>This is a paragraph<br>with two<br>newlines<br>in it</p>
+        <amp-story-grid-layer template="fill">
+          <div class="s-3">
+            <div class="s-2">
+              <div class="s-8">
+                <p class="s-3">This is a paragraph<br>with two<br>newlines<br>in it</p>
+              </div>
+            </div>
+          </div>
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-2">
-        <amp-story-grid-layer template="thirds">
-          <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" grid-area="upper-third" class="s-6"></amp-img>
-          <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" grid-area="middle-third" class="s-6">
-            <source type="video/mp4" src="test.com/video.mp4">
-          </amp-video>
-          <div grid-area="lower-third" class="s-6">
-            <h1>This is a heading inside a container</h1>
+        <amp-story-grid-layer template="fill">
+          <div class="s-3">
+            <div class="s-2">
+              <div class="s-11">
+                <amp-img alt="An image" layout="responsive" width="900" height="1600" src="test.com/image.jpg" class="s-9"></amp-img>
+                <amp-video layout="responsive" poster="test.com/poster.jpg" loop autoplay width="900" height="1600" class="s-10">
+                  <source type="video/mp4" src="test.com/video.mp4">
+                </amp-video>
+                <div class="s-9">
+                  <h1 class="s-3">This is a heading inside a container</h1>
+                </div>
+              </div>
+            </div>
           </div>
         </amp-story-grid-layer>
       </amp-story-page>
       <amp-story-page id="page-3">
-        <amp-story-grid-layer template="vertical" class="s-7">
-          <div></div>
+        <amp-story-grid-layer template="fill">
+          <div class="s-3">
+            <div class="s-2">
+              <div class="s-12">
+                <div class="s-3"></div>
+              </div>
+            </div>
+          </div>
         </amp-story-grid-layer>
-        <amp-story-grid-layer template="fill"></amp-story-grid-layer>
       </amp-story-page>
     </amp-story>
   </body>
@@ -709,6 +790,50 @@ test('bookendConfigSrc', (t) => {
   </body>
 </html>`;
 
+  t.equal(actual, expected);
+  t.end();
+});
+
+test('Hello World', (t) => {
+  const actual = storyJsonToStamp({
+    version: 1,
+    title: 'Hello World',
+    pages: [
+      {
+        layers: [
+          {
+            type: 'container',
+            styles: {
+              flex: 1,
+              backgroundColor: '#87d687',
+            },
+          },
+          {
+            type: 'container',
+            styles: {
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flex: 1,
+            },
+            elements: [
+              {
+                type: 'heading',
+                text: 'Hello World',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    defaultStyles: {
+      heading: {
+        fontFamily: 'sans-serif',
+      },
+    },
+  });
+
+  const expected = fs.readFileSync('hello-world.amp.html', 'utf8').trimRight();
   t.equal(actual, expected);
   t.end();
 });
