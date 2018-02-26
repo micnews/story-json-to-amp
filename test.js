@@ -837,3 +837,50 @@ test('Hello World', (t) => {
   t.equal(actual, expected);
   t.end();
 });
+
+test('Inline text', (t) => {
+  const actual = storyJsonToStamp({
+    version: 1,
+    title: 'Hello World',
+    pages: [
+      {
+        layers: [
+          {
+            type: 'container',
+            styles: {
+              flex: 1,
+              backgroundColor: '#87d687',
+            },
+          },
+          {
+            type: 'container',
+            styles: {
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flex: 1,
+            },
+            elements: [
+              {
+                styles: {
+                  display: 'inline',
+                },
+                type: 'heading',
+                text: 'Hello World',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    defaultStyles: {
+      heading: {
+        fontFamily: 'sans-serif',
+      },
+    },
+  });
+
+  const expected = fs.readFileSync('inline-text.amp.html', 'utf8').trimRight();
+  t.equal(actual, expected);
+  t.end();
+});
