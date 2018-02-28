@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
+/* eslint-disable no-console, import/no-commonjs */
 const argv = require('minimist')(process.argv.slice(2), {
   string: ['output'],
   boolean: ['help'],
