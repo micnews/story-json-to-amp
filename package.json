@@ -13,6 +13,9 @@
     "test": "run-s lint flow test:code",
     "test:code": "NODE_ENV=test nyc babel-tape-runner ./test.js | mic-tap-format"
   },
+  "bin": {
+    "story-json-to-amp": "./bin/cli.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/micnews/story-json-to-stamp.git"
