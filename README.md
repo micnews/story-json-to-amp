@@ -23,10 +23,18 @@ In addition to [standard `story-json` properties](https://github.com/micnews/sto
 | `analytics` | Array of [AMP analytics objects](https://www.ampproject.org/docs/reference/components/amp-analytics) |
 | `bookendConfigSrc` | [Bookend endpoint URL](https://www.ampproject.org/docs/tutorials/visual_story/create_bookend) |
 
-## Google AMP specific fields in `story-json`
+### Google AMP specific fields in `story-json`
 
 - In `story-json` attribute `meta.authorType` can be `Organization` or `Person`. This is uses in structured data.
+-  In `story-json` attribute `meta.images` is an array of images. This is used for AMP story metadata as well as structured data for SEO.
+      where 
+      - first one is square 
+      - second one is `poster-portrait`
+      - third one is `poster-landscape`
 
+### AMP HTML language code - optional
+
+- In `story-json` optional root level `languageCode` attribute takes a [ISO 639-1 language Code](https://www.w3schools.com/tags/ref_language_codes.asp) string to set the AMP HTML header language code eg `<html ⚡ lang="ru">`.
 
 
 ## Example
