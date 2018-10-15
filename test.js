@@ -8,6 +8,13 @@ import storyJsonToStamp, { convertToReactInlineStyle } from './lib';
 test('parsing', (t) => {
   const actual = storyJsonToStamp({
     title: 'A test story',
+    preview: {
+      publisher: 'Mic',
+      publisherLogoSrc: 'https://mic.com/logo.jpg',
+      posterPortraitSrc: 'https://mic.com/logo-portrait.jpg',
+      posterSquareSrc: 'https://mic.com/logo-square.jpg',
+      posterLandscapeSrc: 'https://mic.com/logo-landscape.jpg',
+    },
     canonicalUrl: 'https://mic.com/stories/1',
     meta: {
       images: ['mic.com/image'],
@@ -259,7 +266,7 @@ test('parsing', (t) => {
   <head>
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-0.1.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
     <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
     <title>A test story</title>
     <link rel="canonical" href="https://mic.com/stories/1" />
@@ -440,7 +447,7 @@ test('parsing', (t) => {
     </script>
   </head>
   <body>
-    <amp-story standalone>
+    <amp-story standalone title="A test story" publisher="Mic" publisher-logo-src="https://mic.com/logo.jpg" poster-portrait-src="https://mic.com/logo-portrait.jpg" poster-square-src="https://mic.com/logo-square.jpg" poster-landscape-src="https://mic.com/logo-landscape.jpg">
       <amp-story-page id="page-0" auto-advance-after="5s">
         <amp-story-grid-layer template="fill">
           <div class="s-3">
@@ -514,6 +521,11 @@ test('parsing', (t) => {
 
   const actualNoCustomCss = storyJsonToStamp({
     title: 'A test story',
+    preview: {
+      publisher: 'Mic',
+      publisherLogoSrc: 'https://mic.com/logo.jpg',
+      posterPortraitSrc: 'https://mic.com/logo-portrait.jpg',
+    },
     pages: [],
     canonicalUrl: 'https://mic.com/stories/1',
   });
@@ -523,7 +535,7 @@ test('parsing', (t) => {
   <head>
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-0.1.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
     <title>A test story</title>
     <link rel="canonical" href="https://mic.com/stories/1" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
@@ -543,7 +555,7 @@ test('parsing', (t) => {
     </script>
   </head>
   <body>
-    <amp-story standalone></amp-story>
+    <amp-story standalone title="A test story" publisher="Mic" publisher-logo-src="https://mic.com/logo.jpg" poster-portrait-src="https://mic.com/logo-portrait.jpg"></amp-story>
   </body>
 </html>`;
 
@@ -555,6 +567,11 @@ test('parsing', (t) => {
 test('analytics', (t) => {
   const actual = storyJsonToStamp({
     title: 'A test story',
+    preview: {
+      publisher: 'Mic',
+      publisherLogoSrc: 'https://mic.com/logo.jpg',
+      posterPortraitSrc: 'https://mic.com/logo-portrait.jpg',
+    },
     pages: [],
     canonicalUrl: 'https://mic.com/stories/1',
     analytics: [{
@@ -584,7 +601,7 @@ test('analytics', (t) => {
   <head>
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-0.1.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
     <title>A test story</title>
     <link rel="canonical" href="https://mic.com/stories/1" />
@@ -605,7 +622,7 @@ test('analytics', (t) => {
     </script>
   </head>
   <body>
-    <amp-story standalone>
+    <amp-story standalone title="A test story" publisher="Mic" publisher-logo-src="https://mic.com/logo.jpg" poster-portrait-src="https://mic.com/logo-portrait.jpg">
       <amp-analytics>
         <script type="application/json">
           {
@@ -642,15 +659,25 @@ test('analytics', (t) => {
   t.end();
 });
 
-test('works with no options passed', (t) => {
-  const actual = storyJsonToStamp();
+test('works with minimum options passed', (t) => {
+  const actual = storyJsonToStamp({
+    title: 'A test story',
+    canonicalUrl: 'https://mic.com/stories/1',
+    preview: {
+      publisher: 'Mic',
+      publisherLogoSrc: 'https://mic.com/logo.jpg',
+      posterPortraitSrc: 'https://mic.com/logo-portrait.jpg',
+    },
+  });
 
   const expected = `<!doctype html>
 <html ⚡ lang="en">
   <head>
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-0.1.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
+    <title>A test story</title>
+    <link rel="canonical" href="https://mic.com/stories/1" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <style amp-custom>
@@ -660,13 +687,15 @@ test('works with no options passed', (t) => {
         "@context": "http://schema.org",
         "@type": "NewsArticle",
         "mainEntityOfPage": {
-          "@type": "WebPage"
-        }
+          "@type": "WebPage",
+          "@id": "https://mic.com/stories/1"
+        },
+        "headline": "A test story"
       }
     </script>
   </head>
   <body>
-    <amp-story standalone></amp-story>
+    <amp-story standalone title="A test story" publisher="Mic" publisher-logo-src="https://mic.com/logo.jpg" poster-portrait-src="https://mic.com/logo-portrait.jpg"></amp-story>
   </body>
 </html>`;
 
@@ -675,14 +704,25 @@ test('works with no options passed', (t) => {
 });
 
 test('works with meta passed as string', (t) => {
-  const actual = storyJsonToStamp({ meta: 'this is custom meta' });
+  const actual = storyJsonToStamp({
+    title: 'A test story',
+    canonicalUrl: 'https://mic.com/stories/1',
+    preview: {
+      publisher: 'Mic',
+      publisherLogoSrc: 'https://mic.com/logo.jpg',
+      posterPortraitSrc: 'https://mic.com/logo-portrait.jpg',
+    },
+    meta: 'this is custom meta',
+  });
 
   const expected = `<!doctype html>
 <html ⚡ lang="en">
   <head>
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-0.1.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
+    <title>A test story</title>
+    <link rel="canonical" href="https://mic.com/stories/1" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <style amp-custom>
@@ -690,7 +730,7 @@ test('works with meta passed as string', (t) => {
     this is custom meta
   </head>
   <body>
-    <amp-story standalone></amp-story>
+    <amp-story standalone title="A test story" publisher="Mic" publisher-logo-src="https://mic.com/logo.jpg" poster-portrait-src="https://mic.com/logo-portrait.jpg"></amp-story>
   </body>
 </html>`;
 
@@ -763,14 +803,25 @@ test('exports convertToReactInlineStyle function', (t) => {
 });
 
 test('bookendConfigSrc', (t) => {
-  const actual = storyJsonToStamp({ bookendConfigSrc: 'https://example.com/bookend' });
+  const actual = storyJsonToStamp({
+    title: 'A test story',
+    canonicalUrl: 'https://mic.com/stories/1',
+    preview: {
+      publisher: 'Mic',
+      publisherLogoSrc: 'https://mic.com/logo.jpg',
+      posterPortraitSrc: 'https://mic.com/logo-portrait.jpg',
+    },
+    bookendConfigSrc: 'https://example.com/bookend',
+  });
 
   const expected = `<!doctype html>
 <html ⚡ lang="en">
   <head>
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-0.1.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
+    <title>A test story</title>
+    <link rel="canonical" href="https://mic.com/stories/1" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
     <style amp-custom>
@@ -780,13 +831,15 @@ test('bookendConfigSrc', (t) => {
         "@context": "http://schema.org",
         "@type": "NewsArticle",
         "mainEntityOfPage": {
-          "@type": "WebPage"
-        }
+          "@type": "WebPage",
+          "@id": "https://mic.com/stories/1"
+        },
+        "headline": "A test story"
       }
     </script>
   </head>
   <body>
-    <amp-story standalone bookend-config-src="https://example.com/bookend"></amp-story>
+    <amp-story standalone bookend-config-src="https://example.com/bookend" title="A test story" publisher="Mic" publisher-logo-src="https://mic.com/logo.jpg" poster-portrait-src="https://mic.com/logo-portrait.jpg"></amp-story>
   </body>
 </html>`;
 
@@ -798,6 +851,12 @@ test('Hello World', (t) => {
   const actual = storyJsonToStamp({
     version: 1,
     title: 'Hello World',
+    canonicalUrl: 'https://mic.com/stories/1',
+    preview: {
+      publisher: 'Mic',
+      publisherLogoSrc: 'https://mic.com/logo.jpg',
+      posterPortraitSrc: 'https://mic.com/logo-portrait.jpg',
+    },
     pages: [
       {
         layers: [
@@ -842,6 +901,12 @@ test('Inline text', (t) => {
   const actual = storyJsonToStamp({
     version: 1,
     title: 'Hello World',
+    canonicalUrl: 'https://mic.com/stories/1',
+    preview: {
+      publisher: 'Mic',
+      publisherLogoSrc: 'https://mic.com/logo.jpg',
+      posterPortraitSrc: 'https://mic.com/logo-portrait.jpg',
+    },
     pages: [
       {
         layers: [
