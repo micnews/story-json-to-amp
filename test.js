@@ -319,9 +319,6 @@ test('parsing', (t) => {
         grid-gap: 0
       }
       .s-4 {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
         width: 10px;
         height: 10px;
         border: 1px dashed #000000;
@@ -463,12 +460,12 @@ test('parsing', (t) => {
             <div class="s-2">
               <div class="s-7">
                 <h1 class="s-4">This is a heading</h1>
-                <h1 class="s-3">01<span class="s-5">23</span><span class="s-5 s-6">456</span><span class="s-6">78</span>9</h1>
-                <h2 class="s-3">This is a heading2</h2>
-                <h3 class="s-3">This is a heading3</h3>
-                <h4 class="s-3">This is a heading4</h4>
-                <h5 class="s-3">This is a heading5</h5>
-                <h6 class="s-3">This is a heading6</h6>
+                <h1>01<span class="s-5">23</span><span class="s-5 s-6">456</span><span class="s-6">78</span>9</h1>
+                <h2>This is a heading2</h2>
+                <h3>This is a heading3</h3>
+                <h4>This is a heading4</h4>
+                <h5>This is a heading5</h5>
+                <h6>This is a heading6</h6>
               </div>
             </div>
           </div>
@@ -479,7 +476,7 @@ test('parsing', (t) => {
           <div class="s-3">
             <div class="s-2">
               <div class="s-8">
-                <p class="s-3">This is a paragraph<br>with two<br>newlines<br>in it</p>
+                <p>This is a paragraph<br>with two<br>newlines<br>in it</p>
               </div>
             </div>
           </div>
@@ -495,7 +492,7 @@ test('parsing', (t) => {
                   <source type="video/mp4" src="test.com/video.mp4">
                 </amp-video>
                 <div class="s-9">
-                  <h1 class="s-3">This is a heading inside a container</h1>
+                  <h1>This is a heading inside a container</h1>
                 </div>
               </div>
             </div>
