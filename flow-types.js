@@ -318,4 +318,5 @@ export type StoryType = {
   pages?: $ReadOnlyArray<PageType<*, *>>,
   analytics?: Array<StoryAnalyticsType>,
   bookendConfigSrc?: string,
+  autoAdsConfig?: Object,
 };

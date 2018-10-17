@@ -966,3 +966,68 @@ test('Inline text', (t) => {
   t.equal(actual, expected);
   t.end();
 });
+
+test('autoAdsConfig', (t) => {
+  const actual = storyJsonToStamp({
+    title: 'A test story',
+    canonicalUrl: 'https://mic.com/stories/1',
+    preview: {
+      publisher: 'Mic',
+      publisherLogoSrc: 'https://mic.com/logo.jpg',
+      posterPortraitSrc: 'https://mic.com/logo-portrait.jpg',
+    },
+    autoAdsConfig: {
+      'ad-attributes': {
+        type: 'doubleclick',
+        'data-slot': '/12345/ad-unit',
+      },
+    },
+  });
+
+  const expected = `<!doctype html>
+<html ⚡ lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-story" src="https://cdn.ampproject.org/v0/amp-story-1.0.js"></script>
+    <script async custom-element="amp-story-auto-ads" src="https://cdn.ampproject.org/v0/amp-story-auto-ads-0.1.js"></script>
+    <title>A test story</title>
+    <link rel="canonical" href="https://mic.com/stories/1" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <style amp-custom>
+      .img-cover img {
+        object-fit: cover
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://mic.com/stories/1"
+        },
+        "headline": "A test story"
+      }
+    </script>
+  </head>
+  <body>
+    <amp-story standalone title="A test story" publisher="Mic" publisher-logo-src="https://mic.com/logo.jpg" poster-portrait-src="https://mic.com/logo-portrait.jpg">
+      <amp-story-auto-ads>
+        <script type="application/json">
+          {
+            "ad-attributes": {
+              "type": "doubleclick",
+              "data-slot": "/12345/ad-unit"
+            }
+          }
+        </script>
+      </amp-story-auto-ads>
+    </amp-story>
+  </body>
+</html>`;
+
+  t.equal(actual, expected);
+  t.end();
+});
