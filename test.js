@@ -854,7 +854,9 @@ test('bookendConfigSrc', (t) => {
     </script>
   </head>
   <body>
-    <amp-story standalone bookend-config-src="https://example.com/bookend" title="A test story" publisher="Mic" publisher-logo-src="https://mic.com/logo.jpg" poster-portrait-src="https://mic.com/logo-portrait.jpg"></amp-story>
+    <amp-story standalone title="A test story" publisher="Mic" publisher-logo-src="https://mic.com/logo.jpg" poster-portrait-src="https://mic.com/logo-portrait.jpg">
+      <amp-story-bookend layout="nodisplay" src="https://example.com/bookend"></amp-story-bookend>
+    </amp-story>
   </body>
 </html>`;
 
