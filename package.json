@@ -1,6 +1,6 @@
 {
   "name": "story-json-to-amp",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Convert story JSON to STAMP HTML.",
   "main": "dist/index.js",
   "scripts": {
