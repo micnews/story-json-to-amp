@@ -300,13 +300,23 @@ export type StoryMetaType = {
   description?: string,
 };
 
+export type StoryPreviewType = {
+  publisher: string,
+  publisherLogoSrc: string,
+  posterPortraitSrc: string,
+  posterSquareSrc?: string,
+  posterLandscapeSrc?: string,
+};
+
 export type StoryType = {
-  title?: string,
+  title: string,
+  preview: StoryPreviewType,
+  canonicalUrl: string,
   meta?: string | StoryMetaType,
   customCss?: string,
   defaultStyles?: { [ElementTypeType]: StylesType, },
   pages?: $ReadOnlyArray<PageType<*, *>>,
-  canonicalUrl?: string,
   analytics?: Array<StoryAnalyticsType>,
   bookendConfigSrc?: string,
+  autoAdsConfig?: Object,
 };
