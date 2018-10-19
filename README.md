@@ -19,6 +19,11 @@ In addition to [standard `story-json` properties](https://github.com/micnews/sto
 
 | Name | Description |
 | ------ | ------------- |
+| `preview.publisher` | REQUIRED. The name of the story's publisher. |
+| `preview.publisherLogoSrc` | REQUIRED. The publisher's logo in square format (1x1 aspect ratio). |
+| `preview.posterPortraitSrc` | REQUIRED. The story poster in portrait format (3x4 aspect ratio). |
+| `preview.posterSquareSrc` | The story poster in square format (1x1 aspect ratio). |
+| `preview.posterLandscapeSrc` | The story poster in landscape format (4x3 aspect ratio). |
 | `customCss` | Extra CSS to append to AMP story document. This is useful for adding fonts or making AMP-specific customizations. |
 | `analytics` | Array of [AMP analytics objects](https://www.ampproject.org/docs/reference/components/amp-analytics) |
 | `bookendConfigSrc` | [Bookend endpoint URL](https://www.ampproject.org/docs/tutorials/visual_story/create_bookend) |
